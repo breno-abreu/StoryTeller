@@ -1,0 +1,10 @@
+- verificar se há ou não histórias, nesse caso mostrar um texto dizendo que não há
+- estilo dos botões gerados dinamicamente
+- verificar se algum título já existe
+- verificar se o título está vazio
+- adicionar vários itens e ver como a lista se comporta, ver se some da tela ou não
+- Botões com imagens
+- adicionar botão de salvar
+- perguntar se quer slavar antes de voltar
+- salvar a pausar o sistema
+- mostrar mensagem quando é salvo
