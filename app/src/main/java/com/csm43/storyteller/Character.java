@@ -21,7 +21,7 @@ public class Character extends AppCompatActivity {
         setContentView(R.layout.activity_character);
 
         charImage = (ImageView)findViewById(R.id.charImage);
-
+        // teste
     }
 
     public void chooseImgFromGallery(View v){
