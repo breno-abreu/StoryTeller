@@ -8,3 +8,6 @@
 - perguntar se quer slavar antes de voltar
 - salvar a pausar o sistema
 - mostrar mensagem quando é salvo
+- fazer constantes como nomes de arquivos e pastas
+- mensagnes de log para debugg
+- try excepts

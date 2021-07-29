@@ -15,6 +15,15 @@ public class CharacterList extends AppCompatActivity {
     }
 
     public void showCharacterActivity(View v){
+        Intent parent = getIntent();
+        String title = parent.getStringExtra("TITLE");
+        Intent intent = new Intent(this, Character.class);
+        startActivity(intent);
+    }
+
+    public void createEmptyLocation(View v){
+        Intent parent = getIntent();
+        String title = parent.getStringExtra("TITLE");
         Intent intent = new Intent(this, Character.class);
         startActivity(intent);
     }

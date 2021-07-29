@@ -25,19 +25,21 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<String> titles = ((FileManager)this.getApplication()).getFileNames(getExternalFilesDir(null) + "/Histórias");
 
-        LinearLayout ll = (LinearLayout)findViewById(R.id.storiesLinearLayout);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        if(titles != null) {
+            LinearLayout ll = (LinearLayout) findViewById(R.id.storiesLinearLayout);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-        for(String title : titles){
-            Button button = new Button(this);
-            button.setText(title);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showOptionsActivity(title);
-                }
-            });
-            ll.addView(button, lp);
+            for (String title : titles) {
+                Button button = new Button(this);
+                button.setText(title);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showOptionsActivity(title);
+                    }
+                });
+                ll.addView(button, lp);
+            }
         }
     }
 

@@ -15,23 +15,36 @@ public class Options extends AppCompatActivity {
     }
 
     public void showCharacterListActivity(View v){
+        Intent parent = getIntent();
+        String title = parent.getStringExtra("TITLE");
+
         Intent intent = new Intent(this, CharacterList.class);
+        intent.putExtra("TITLE", title);
         startActivity(intent);
     }
 
     public void showLocationListActivity(View v){
+        Intent parent = getIntent();
+        String title = parent.getStringExtra("TITLE");
+
         Intent intent = new Intent(this, LocationList.class);
+        intent.putExtra("TITLE", title);
         startActivity(intent);
     }
 
     public void showChapterListActivity(View v){
+        Intent parent = getIntent();
+        String title = parent.getStringExtra("TITLE");
+
         Intent intent = new Intent(this, ChapterList.class);
+        intent.putExtra("TITLE", title);
         startActivity(intent);
     }
 
     public void deleteStory(View v){
         Intent intent = getIntent();
         String title = intent.getStringExtra("TITLE");
+
         ((FileManager)this.getApplication()).deleteStoryFolder(title);
         Intent mainActivity = new Intent(this, MainActivity.class);
         startActivity(mainActivity);

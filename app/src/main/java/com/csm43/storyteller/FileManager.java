@@ -6,6 +6,8 @@ import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class FileManager extends Application {
@@ -50,11 +52,64 @@ public class FileManager extends Application {
         deleteRecursively(dir);
     }
 
+    public void deleteCharacter(String storyTitle, String name){
+        File dir = new File(getExternalFilesDir(null) + "/Histórias/" + storyTitle + "/Personagens/" + name);
+        deleteRecursively(dir);
+    }
+
+    public void deleteLocation(String storyTitle, String name){
+        File dir = new File(getExternalFilesDir(null) + "/Histórias/" + storyTitle + "/Lugares/" + name);
+        deleteRecursively(dir);
+    }
+
+    public void deleteChapter(String storyTitle, String name){
+        File dir = new File(getExternalFilesDir(null) + "/Histórias/" + storyTitle + "/Capítulos/" + name);
+        deleteRecursively(dir);
+    }
+
     private void deleteRecursively(File dirOrFile){
-        if(dirOrFile.isDirectory()){
+        if(dirOrFile != null && dirOrFile.isDirectory()){
             for(File child : dirOrFile.listFiles())
                 deleteRecursively(child);
         }
         dirOrFile.delete();
+    }
+
+    public void createCharacterFolder(String title){
+        File dir = new File(getExternalFilesDir(null) + "/Histórias/" + title + "/Personagens");
+        if(!dir.exists()) {
+            dir.mkdir();
+            writeFile(dir.getPath(), "nome.stf");
+            writeFile(dir.getPath(), "carFísicas.stf");
+            writeFile(dir.getPath(), "personalidade.stf");
+            writeFile(dir.getPath(), "background.stf");
+        }
+    }
+
+    public void createLocationFolder(String title){
+        File dir = new File(getExternalFilesDir(null) + "/Histórias/" + title + "/Lugares");
+        if(!dir.exists()){
+            dir.mkdir();
+            writeFile(dir.getPath(), "nome.stf");
+            writeFile(dir.getPath(), "descrição.stf");
+        }
+    }
+
+    public void createChapterFolder(String title){
+        File dir = new File(getExternalFilesDir(null) + "/Histórias/" + title + "/Capítulos");
+        if(!dir.exists()) {
+            dir.mkdir();
+            writeFile(dir.getPath(), "titulo.stf");
+            writeFile(dir.getPath(), "descrição.stf");
+        }
+    }
+
+    public void writeFile(String path, String name){
+        File file = new File(path, name);
+        try (FileOutputStream nameStream = new FileOutputStream(file)) {
+            nameStream.write("".getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
