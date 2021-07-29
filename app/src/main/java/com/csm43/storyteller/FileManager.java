@@ -2,16 +2,30 @@ package com.csm43.storyteller;
 
 import android.app.Activity;
 import android.app.Application;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class FileManager extends Application {
+    private String currentStory;
+
+    public String getCurrentStory(){
+        return currentStory;
+    }
+
+    public void setCurrentStory(String story){
+        currentStory = story;
+    }
 
     public void createMainFolder(){
         File dir = new File(getExternalFilesDir(null) + "/Histórias");
@@ -76,7 +90,7 @@ public class FileManager extends Application {
         dirOrFile.delete();
     }
 
-    public void writeCharacter(String storyTitle, String name, String physicalChar, String personality, String background){
+    public void writeCharacter(String storyTitle, String name, String physicalChar, String personality, String background, Bitmap imgBitmap){
         File dir = new File(getExternalFilesDir(null) + "/Histórias/" + storyTitle + "/Personagens/" + name);
         if(!dir.exists()){
             dir.mkdir();
@@ -85,19 +99,21 @@ public class FileManager extends Application {
         writeFile(dir.getPath(), "características.stf", physicalChar);
         writeFile(dir.getPath(), "personalidade.stf", personality);
         writeFile(dir.getPath(), "background.stf", background);
+        writeImage(dir.getPath(), "img.png", imgBitmap);
     }
 
-    public void writeLocation(String storyTitle, String name, String description){
-        File dir = new File(getExternalFilesDir(null) + "/Histórias/" + storyTitle + "/Personagens/" + name);
+    public void writeLocation(String storyTitle, String name, String description, Bitmap imgBitmap){
+        File dir = new File(getExternalFilesDir(null) + "/Histórias/" + storyTitle + "/Lugares/" + name);
         if(!dir.exists()){
             dir.mkdir();
         }
         writeFile(dir.getPath(), "nome.stf", name);
         writeFile(dir.getPath(), "descrição.stf", description);
+        writeImage(dir.getPath(), "img.png", imgBitmap);
     }
 
     public void writeChapter(String storyTitle, String name, String description){
-        File dir = new File(getExternalFilesDir(null) + "/Histórias/" + storyTitle + "/Personagens/" + name);
+        File dir = new File(getExternalFilesDir(null) + "/Histórias/" + storyTitle + "/Capítulos/" + name);
         if(!dir.exists()){
             dir.mkdir();
         }
@@ -112,5 +128,49 @@ public class FileManager extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void writeImage(String path, String name, Bitmap img){
+        File file = new File(path, name);
+        try(FileOutputStream stream = new FileOutputStream(file)){
+            img.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String loadFile(String storyTitle, String option, String name, String field){
+        String path = getExternalFilesDir(null) + "/Histórias/" + storyTitle + "/" + option + "/" + name + "/" + field;
+        File file = new File(path);
+        if(file.exists()){
+            int length = (int)file.length();
+            byte[] bytes = new byte[length];
+            try(FileInputStream stream = new FileInputStream(file)){
+                stream.read(bytes);
+                return new String(bytes);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public Bitmap loadImg(String storyTitle, String option, String name){
+        String path = getExternalFilesDir(null) + "/Histórias/" + storyTitle + "/" + option + "/" + name + "/" + "img.png";
+        File file = new File(path);
+        if(file.exists()){
+            try(FileInputStream stream = new FileInputStream(file)){
+                return BitmapFactory.decodeFile(file.getAbsolutePath());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 }

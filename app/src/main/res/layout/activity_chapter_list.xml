@@ -20,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/chaptersLinearLayout"
         android:layout_width="414dp"
         android:layout_height="614dp"
         android:layout_marginTop="10dp"

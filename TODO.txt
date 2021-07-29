@@ -11,3 +11,5 @@
 - fazer constantes como nomes de arquivos e pastas
 - mensagnes de log para debugg
 - try excepts
+- trocar nome da pasta ao mudar o nome do persongaem
+- ver problema ao trocar o texto ele troca a imagem também
