@@ -28,4 +28,12 @@ public class Options extends AppCompatActivity {
         Intent intent = new Intent(this, ChapterList.class);
         startActivity(intent);
     }
+
+    public void deleteStory(View v){
+        Intent intent = getIntent();
+        String title = intent.getStringExtra("TITLE");
+        ((FileManager)this.getApplication()).deleteStoryFolder(title);
+        Intent mainActivity = new Intent(this, MainActivity.class);
+        startActivity(mainActivity);
+    }
 }

@@ -20,8 +20,7 @@ public class NewStory extends AppCompatActivity {
     }
 
     public void createNewStory(View v){
-        ((Auxiliar)this.getApplication()).addTitle(storyTitle.getText().toString());
-
+        ((FileManager)this.getApplication()).createStoryFolder(storyTitle.getText().toString());
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

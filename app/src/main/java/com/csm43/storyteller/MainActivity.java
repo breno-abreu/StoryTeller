@@ -9,11 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private Button newStoryButton;
-    private ArrayList<String> titles;
     private ArrayList<Button> titleButtons;
 
     @Override
@@ -21,7 +21,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        titles = ((Auxiliar)this.getApplication()).getTitles();
+        ((FileManager)this.getApplication()).createMainFolder();
+
+        ArrayList<String> titles = ((FileManager)this.getApplication()).getFileNames(getExternalFilesDir(null) + "/Histórias");
 
         LinearLayout ll = (LinearLayout)findViewById(R.id.storiesLinearLayout);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void showOptionsActivity(String title){
+    public void showOptionsActivity(String title) {
         Intent intent = new Intent(this, Options.class);
         intent.putExtra("TITLE", title);
         startActivity(intent);
