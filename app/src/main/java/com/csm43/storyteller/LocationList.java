@@ -18,13 +18,7 @@ public class LocationList extends AppCompatActivity {
         Intent parent = getIntent();
         String title = parent.getStringExtra("TITLE");
         Intent intent = new Intent(this, Location.class);
-        startActivity(intent);
-    }
-
-    public void createEmptyLocation(View v){
-        Intent parent = getIntent();
-        String title = parent.getStringExtra("TITLE");
-        Intent intent = new Intent(this, Location.class);
+        intent.putExtra("TITLE", title);
         startActivity(intent);
     }
 }

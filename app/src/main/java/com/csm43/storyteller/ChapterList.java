@@ -18,13 +18,7 @@ public class ChapterList extends AppCompatActivity {
         Intent parent = getIntent();
         String title = parent.getStringExtra("TITLE");
         Intent intent = new Intent(this, Chapter.class);
-        startActivity(intent);
-    }
-
-    public void createEmptyChapter(View v){
-        Intent parent = getIntent();
-        String title = parent.getStringExtra("TITLE");
-        Intent intent = new Intent(this, Chapter.class);
+        intent.putExtra("TITLE", title);
         startActivity(intent);
     }
 }

@@ -7,7 +7,7 @@
     tools:context=".Character">
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/characterName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -23,7 +23,7 @@
         android:layout_height="638dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName">
+        app:layout_constraintTop_toBottomOf="@+id/characterName">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,7 +52,7 @@
                 android:text="Características Físicas" />
 
             <EditText
-                android:id="@+id/editTextTextMultiLine2"
+                android:id="@+id/characterPhysicalChar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -66,7 +66,7 @@
                 android:text="Personalidade" />
 
             <EditText
-                android:id="@+id/editTextTextMultiLine3"
+                android:id="@+id/characterPersonality"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -80,7 +80,7 @@
                 android:text="Background" />
 
             <EditText
-                android:id="@+id/editTextTextMultiLine4"
+                android:id="@+id/characterBackground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -109,6 +109,7 @@
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="25dp"
         android:clickable="true"
+        android:onClick="saveCharacter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_menu_save" />

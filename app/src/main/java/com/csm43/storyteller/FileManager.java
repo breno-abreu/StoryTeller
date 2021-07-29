@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -75,39 +76,39 @@ public class FileManager extends Application {
         dirOrFile.delete();
     }
 
-    public void createCharacterFolder(String title){
-        File dir = new File(getExternalFilesDir(null) + "/Histórias/" + title + "/Personagens");
-        if(!dir.exists()) {
-            dir.mkdir();
-            writeFile(dir.getPath(), "nome.stf");
-            writeFile(dir.getPath(), "carFísicas.stf");
-            writeFile(dir.getPath(), "personalidade.stf");
-            writeFile(dir.getPath(), "background.stf");
-        }
-    }
-
-    public void createLocationFolder(String title){
-        File dir = new File(getExternalFilesDir(null) + "/Histórias/" + title + "/Lugares");
+    public void writeCharacter(String storyTitle, String name, String physicalChar, String personality, String background){
+        File dir = new File(getExternalFilesDir(null) + "/Histórias/" + storyTitle + "/Personagens/" + name);
         if(!dir.exists()){
             dir.mkdir();
-            writeFile(dir.getPath(), "nome.stf");
-            writeFile(dir.getPath(), "descrição.stf");
         }
+        writeFile(dir.getPath(), "nome.stf", name);
+        writeFile(dir.getPath(), "características.stf", physicalChar);
+        writeFile(dir.getPath(), "personalidade.stf", personality);
+        writeFile(dir.getPath(), "background.stf", background);
     }
 
-    public void createChapterFolder(String title){
-        File dir = new File(getExternalFilesDir(null) + "/Histórias/" + title + "/Capítulos");
-        if(!dir.exists()) {
+    public void writeLocation(String storyTitle, String name, String description){
+        File dir = new File(getExternalFilesDir(null) + "/Histórias/" + storyTitle + "/Personagens/" + name);
+        if(!dir.exists()){
             dir.mkdir();
-            writeFile(dir.getPath(), "titulo.stf");
-            writeFile(dir.getPath(), "descrição.stf");
         }
+        writeFile(dir.getPath(), "nome.stf", name);
+        writeFile(dir.getPath(), "descrição.stf", description);
     }
 
-    public void writeFile(String path, String name){
+    public void writeChapter(String storyTitle, String name, String description){
+        File dir = new File(getExternalFilesDir(null) + "/Histórias/" + storyTitle + "/Personagens/" + name);
+        if(!dir.exists()){
+            dir.mkdir();
+        }
+        writeFile(dir.getPath(), "nome.stf", name);
+        writeFile(dir.getPath(), "descrição.stf", description);
+    }
+
+    public void writeFile(String path, String name, String content){
         File file = new File(path, name);
         try (FileOutputStream nameStream = new FileOutputStream(file)) {
-            nameStream.write("".getBytes());
+            nameStream.write(content.getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }

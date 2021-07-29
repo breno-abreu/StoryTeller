@@ -7,13 +7,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class Character extends AppCompatActivity {
     private static final int GALLERY_REQUEST_CODE = 123;
     ImageView charImage;
+    private EditText name;
+    private EditText physicalChar;
+    private EditText personality;
+    private EditText background;
+    private String originalName;
+    private String storyTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +30,14 @@ public class Character extends AppCompatActivity {
         setContentView(R.layout.activity_character);
 
         charImage = (ImageView)findViewById(R.id.charImage);
+        name = (EditText)findViewById(R.id.characterName);
+        physicalChar = (EditText)findViewById(R.id.characterPhysicalChar);
+        personality = (EditText)findViewById(R.id.characterPersonality);
+        background = (EditText)findViewById(R.id.characterBackground);
+        originalName = name.getText().toString();
+
+        Intent parent = getIntent();
+        storyTitle = parent.getStringExtra("TITLE");
     }
 
     public void chooseImgFromGallery(View v){
@@ -37,6 +54,15 @@ public class Character extends AppCompatActivity {
         if(requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data != null){
             Uri imageData = data.getData();
             charImage.setImageURI(imageData);
+        }
+    }
+
+    public void saveCharacter(View v){
+        if(originalName.equals("") || originalName.equals(name.getText().toString())){
+            ((FileManager)this.getApplication()).writeCharacter(storyTitle, name.getText().toString(),
+                    physicalChar.getText().toString(), personality.getText().toString(), background.getText().toString());
+
+            //Toast.makeText(this, "Salvo", Toast.LENGTH_SHORT).show();
         }
     }
 }
