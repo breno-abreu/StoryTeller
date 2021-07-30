@@ -88,4 +88,10 @@ public class Location extends AppCompatActivity {
         description.setText(physicalTemp);
         locationImage.setImageBitmap(imgTemp);
     }
+
+    public void deleteLocation(View v){
+        ((FileManager)this.getApplication()).deleteLocation(storyTitle, name.getText().toString());
+        Intent intent = new Intent(this, LocationList.class);
+        startActivity(intent);
+    }
 }

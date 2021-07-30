@@ -13,3 +13,12 @@
 - try excepts
 - trocar nome da pasta ao mudar o nome do persongaem
 - ver problema ao trocar o texto ele troca a imagem também
+
+falta:
+- exclusão de registros
+- verificação de dados e mensagens
+- banco de dados
+- áudio
+- design
+- bugs
+- testes

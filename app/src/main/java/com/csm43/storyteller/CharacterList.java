@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class CharacterList extends AppCompatActivity {
     private String storyTitle;
+    private LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +23,15 @@ public class CharacterList extends AppCompatActivity {
 
         storyTitle = ((FileManager)this.getApplication()).getCurrentStory();
 
+        updateList();
+    }
+
+    private void updateList(){
         ArrayList<String> names = ((FileManager)this.getApplication()).getFileNames(getExternalFilesDir(null) +
                 "/Histórias/" + storyTitle + "/Personagens");
 
         if(names != null) {
-            LinearLayout ll = (LinearLayout) findViewById(R.id.charactersLinearLayout);
+            linearLayout = (LinearLayout) findViewById(R.id.charactersLinearLayout);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
             for (String name : names) {
@@ -38,7 +43,7 @@ public class CharacterList extends AppCompatActivity {
                         showCharacterActivity(name);
                     }
                 });
-                ll.addView(button, lp);
+                linearLayout.addView(button, lp);
             }
         }
     }

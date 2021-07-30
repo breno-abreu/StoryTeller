@@ -52,4 +52,10 @@ public class Chapter extends AppCompatActivity {
         name.setText(nameTemp);
         description.setText(physicalTemp);
     }
+
+    public void deleteChapter(View v){
+        ((FileManager)this.getApplication()).deleteChapter(storyTitle, name.getText().toString());
+        Intent intent = new Intent(this, ChapterList.class);
+        startActivity(intent);
+    }
 }

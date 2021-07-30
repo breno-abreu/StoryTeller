@@ -101,4 +101,10 @@ public class Character extends AppCompatActivity {
         background.setText(backgroundTemp);
         charImage.setImageBitmap(imgTemp);
     }
+
+    public void deleteCharacter(View v){
+        ((FileManager)this.getApplication()).deleteCharacter(storyTitle, name.getText().toString());
+        Intent intent = new Intent(this, CharacterList.class);
+        startActivity(intent);
+    }
 }

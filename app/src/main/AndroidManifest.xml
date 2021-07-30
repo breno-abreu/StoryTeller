@@ -22,7 +22,7 @@
         <activity
             android:name=".Character"
             android:label="Personagem"
-            android:parentActivityName=".ChapterList"/>
+            android:parentActivityName=".CharacterList"/>
         <activity
             android:name=".ChapterList"
             android:label="Linha do Tempo"
