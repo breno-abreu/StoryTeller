@@ -50,8 +50,10 @@ public class Character extends AppCompatActivity {
             originalName = intent.getStringExtra("NAME");
             loadCharacter();
         }
-        else
+        else{
             originalName = "";
+        }
+
     }
 
     public void chooseImgFromGallery(View v){
@@ -100,6 +102,10 @@ public class Character extends AppCompatActivity {
         personality.setText(personalityTemp);
         background.setText(backgroundTemp);
         charImage.setImageBitmap(imgTemp);
+
+        Drawable drawable = charImage.getDrawable();
+        BitmapDrawable bitmapDrawable = (BitmapDrawable)drawable;
+        imgBitmap = bitmapDrawable.getBitmap();
     }
 
     public void deleteCharacter(View v){

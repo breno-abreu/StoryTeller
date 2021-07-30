@@ -87,6 +87,10 @@ public class Location extends AppCompatActivity {
         name.setText(nameTemp);
         description.setText(physicalTemp);
         locationImage.setImageBitmap(imgTemp);
+
+        Drawable drawable = locationImage.getDrawable();
+        BitmapDrawable bitmapDrawable = (BitmapDrawable)drawable;
+        imgBitmap = bitmapDrawable.getBitmap();
     }
 
     public void deleteLocation(View v){
