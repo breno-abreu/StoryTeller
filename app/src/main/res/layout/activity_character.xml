@@ -10,32 +10,24 @@
         android:id="@+id/characterName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:ems="10"
         android:hint="Nome"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="48dp"
+        tools:layout_editor_absoluteY="80dp" />
 
     <ScrollView
-        android:layout_width="414dp"
-        android:layout_height="638dp"
+        android:layout_width="351dp"
+        android:layout_height="209dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/characterName">
+        tools:layout_editor_absoluteY="278dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/charImage"
-                android:layout_width="match_parent"
-                android:layout_height="176dp"
-                app:srcCompat="@drawable/no_photo"
-                tools:srcCompat="@drawable/no_photo" />
 
             <ImageButton
                 android:id="@+id/changeCharImgButton"
@@ -87,21 +79,81 @@
                 android:gravity="start|top"
                 android:inputType="textMultiLine" />
 
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme" />
+
         </LinearLayout>
     </ScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton5"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar10"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:background="@color/blue"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton10"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:backgroundTint="#00FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?attr/actionModeCloseDrawable"
+        tools:ignore="SpeakableTextPresentCheck"
+        app:tint="#FFFFFF" />
+
+    <ImageButton
+        android:id="@+id/imageButton11"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="#00FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/webp_net_resizeimage__2_" />
+
+    <ImageView
+        android:id="@+id/charImage"
+        android:layout_width="match_parent"
+        android:layout_height="176dp"
+        app:srcCompat="@drawable/no_photo"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="142dp"
+        tools:srcCompat="@drawable/no_photo" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar11"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:background="@color/blue"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="25dp"
-        android:backgroundTint="#F44336"
-        android:clickable="true"
-        android:onClick="deleteCharacter"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/gabriela"
+        android:text="TextView"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:drawable/ic_delete" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton6"
@@ -109,10 +161,12 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="25dp"
+        android:backgroundTint="#1E88E5"
         android:clickable="true"
         android:onClick="saveCharacter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="#1E88E5"
         app:srcCompat="@android:drawable/ic_menu_save" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
