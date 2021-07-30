@@ -17,6 +17,7 @@
 - ao criar um usuário, guardar informações no dispositivo, quando acessar de novo, 
 	procurar nesses arquivos, caso não encontre procurar no servidor
 - salvar antes de sair da página, antres de voltar
+- salvar imagem básica
 
 falta:
 - verificação de dados e mensagens

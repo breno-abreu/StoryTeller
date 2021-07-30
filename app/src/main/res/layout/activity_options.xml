@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@empty"
     tools:context=".Options">
 
     <Button
@@ -11,7 +12,6 @@
         android:layout_width="365dp"
         android:layout_height="75dp"
         android:layout_marginTop="30dp"
-        android:background="@empty"
         android:onClick="showCharacterListActivity"
         android:text="Personagens"
         app:layout_constraintEnd_toEndOf="parent"
@@ -91,7 +91,7 @@
     <EditText
         android:id="@+id/editTextTextPersonName"
         android:layout_width="365dp"
-        android:layout_height="41dp"
+        android:layout_height="48dp"
         android:layout_marginTop="50dp"
         android:ems="10"
         android:hint="Título"
