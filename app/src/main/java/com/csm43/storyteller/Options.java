@@ -6,10 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Options extends AppCompatActivity {
     private String storyTitle;
+    private EditText titleTop;
+    private TextView titleBottom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +23,11 @@ public class Options extends AppCompatActivity {
         Intent intent = getIntent();
         storyTitle = intent.getStringExtra("TITLE");
 
-        if(storyTitle != null)
-            ((FileManager)this.getApplication()).setCurrentStory(storyTitle);
+        titleTop = findViewById(R.id.optionsTitleTop);
+        titleBottom = findViewById(R.id.optionsTitleBottom);
+
+        titleTop.setText(storyTitle);
+        titleBottom.setText(storyTitle);
     }
 
     public void showCharacterListActivity(View v){
@@ -43,6 +50,12 @@ public class Options extends AppCompatActivity {
 
     public void deleteStory(View v){
         ((FileManager)this.getApplication()).deleteStoryFolder(storyTitle);
+        Toast.makeText(this, "História \"" + storyTitle + "\" excluída!", Toast.LENGTH_LONG).show();
+        Intent mainActivity = new Intent(this, MainActivity.class);
+        startActivity(mainActivity);
+    }
+
+    public void goToPreviousActivity(View v){
         Intent mainActivity = new Intent(this, MainActivity.class);
         startActivity(mainActivity);
     }

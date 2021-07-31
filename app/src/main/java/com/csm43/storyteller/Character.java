@@ -22,14 +22,13 @@ public class Character extends AppCompatActivity {
     ImageView charImage;
     Bitmap imgBitmap;
     private EditText name;
-    private EditText physicalChar;
-    private EditText personality;
-    private EditText background;
+    private EditText description;
     private String originalName;
     private String storyTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //TODO
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character);
 
@@ -38,6 +37,7 @@ public class Character extends AppCompatActivity {
 
         charImage = (ImageView)findViewById(R.id.charImage);
         name = (EditText)findViewById(R.id.characterName);
+        description = findViewById(R.id.characterDescription);
 
         Drawable drawable = charImage.getDrawable();
         BitmapDrawable bitmapDrawable = (BitmapDrawable)drawable;
@@ -63,7 +63,6 @@ public class Character extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if(requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data != null){
             Uri imageData = data.getData();
             charImage.setImageURI(imageData);
@@ -77,27 +76,20 @@ public class Character extends AppCompatActivity {
     public void saveCharacter(View v){
         if(originalName.equals("") || originalName.equals(name.getText().toString())){
             ((FileManager)this.getApplication()).writeCharacter(storyTitle, name.getText().toString(),
-                    physicalChar.getText().toString(), personality.getText().toString(),
-                    background.getText().toString(), imgBitmap);
+                    description.getText().toString(), imgBitmap);
         }
     }
 
     private void loadCharacter(){
         String nameTemp = ((FileManager)this.getApplication()).loadFile(storyTitle,
                 "Personagens", originalName, "nome.stf");
-        String physicalTemp = ((FileManager)this.getApplication()).loadFile(storyTitle,
-                "Personagens", originalName, "características.stf");
-        String personalityTemp = ((FileManager)this.getApplication()).loadFile(storyTitle,
-                "Personagens", originalName, "personalidade.stf");
-        String backgroundTemp = ((FileManager)this.getApplication()).loadFile(storyTitle,
-                "Personagens", originalName, "background.stf");
+        String descriptionTemp = ((FileManager)this.getApplication()).loadFile(storyTitle,
+                "Personagens", originalName, "descrição.stf");
         Bitmap imgTemp = ((FileManager)this.getApplication()).loadImg(storyTitle,
                 "Personagens", originalName);
 
         name.setText(nameTemp);
-        physicalChar.setText(physicalTemp);
-        personality.setText(personalityTemp);
-        background.setText(backgroundTemp);
+        description.setText(descriptionTemp);
         charImage.setImageBitmap(imgTemp);
 
         Drawable drawable = charImage.getDrawable();

@@ -18,6 +18,8 @@
 	procurar nesses arquivos, caso não encontre procurar no servidor
 - salvar antes de sair da página, antres de voltar
 - salvar imagem básica
+- permitir duplicatas? não né, por causa das pastas
+- rename
 
 falta:
 - verificação de dados e mensagens
@@ -28,9 +30,10 @@ falta:
 - bugs
 - testes
 - cmoentários e melhoria do código
-- toolbar
-- trocar por recycleview
-- remover campos dos personagens
+- toolbar <<
+- trocar por recycleview <<
+- remover campos dos personagens <<
+- acrescentar mais campos
 
 
 All:

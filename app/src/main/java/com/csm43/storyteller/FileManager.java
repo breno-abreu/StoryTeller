@@ -90,15 +90,13 @@ public class FileManager extends Application {
         dirOrFile.delete();
     }
 
-    public void writeCharacter(String storyTitle, String name, String physicalChar, String personality, String background, Bitmap imgBitmap){
+    public void writeCharacter(String storyTitle, String name, String description, Bitmap imgBitmap){
         File dir = new File(getExternalFilesDir(null) + "/Histórias/" + storyTitle + "/Personagens/" + name);
         if(!dir.exists()){
             dir.mkdir();
         }
         writeFile(dir.getPath(), "nome.stf", name);
-        writeFile(dir.getPath(), "características.stf", physicalChar);
-        writeFile(dir.getPath(), "personalidade.stf", personality);
-        writeFile(dir.getPath(), "background.stf", background);
+        writeFile(dir.getPath(), "descrição.stf", description);
         writeImage(dir.getPath(), "img.png", imgBitmap);
     }
 

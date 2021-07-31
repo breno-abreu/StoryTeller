@@ -21,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+        app:layout_constraintTop_toBottomOf="@+id/optionsTitleTop"
         app:rippleColor="#FFFFFF" />
 
     <Button
@@ -81,6 +81,7 @@
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:backgroundTint="#00FFFFFF"
+        android:onClick="goToPreviousActivity"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="?attr/actionModeCloseDrawable"
@@ -92,13 +93,14 @@
         android:layout_width="61dp"
         android:layout_height="53dp"
         android:backgroundTint="#00FFFFFF"
+        android:onClick="deleteStory"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/webp_net_resizeimage__2_"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/optionsTitleTop"
         android:layout_width="365dp"
         android:layout_height="48dp"
         android:layout_marginTop="50dp"
@@ -114,7 +116,7 @@
         android:id="@+id/toolbar17"
         android:layout_width="0dp"
         android:layout_height="55dp"
-        android:background="@color/teal_700"
+        android:background="#00897B"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -122,7 +124,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/optionsTitleBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"

@@ -6,34 +6,42 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView storyRecyclerView;
-    private RecyclerView.Adapter storyAdapter;
+    private StoryAdapter storyAdapter;
     private RecyclerView.LayoutManager storyLayoutManager;
+    private TextView emptyText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         ((FileManager)this.getApplication()).createMainFolder();
 
-        ArrayList<String> titles = ((FileManager)this.getApplication()).getFileNames(getExternalFilesDir(null) + "/Histórias");
-        ArrayList<StoryItem> storyList = new ArrayList<StoryItem>();
+        emptyText = findViewById(R.id.mainEmptyText);
 
-        if(titles != null) {
+        if(buildRecyclerView())
+            emptyText.setText("");
+        else
+            emptyText.setText("Nenhuma história a ser exibida");
+    }
+
+    public boolean buildRecyclerView(){
+        ArrayList<String> titles = ((FileManager)this.getApplication()).getFileNames(getExternalFilesDir(null) + "/Histórias");
+        ArrayList<Item> storyList = new ArrayList<Item>();
+
+        if(titles != null && titles.size() != 0) {
             for (String title : titles) {
-                storyList.add(new StoryItem(title));
+                storyList.add(new Item(title, R.drawable.book));
             }
         }
+        else
+            return false;
 
         storyRecyclerView = findViewById(R.id.storyRecyclerView);
         storyRecyclerView.setHasFixedSize(true);
@@ -42,6 +50,15 @@ public class MainActivity extends AppCompatActivity {
         storyRecyclerView.setLayoutManager(storyLayoutManager);
         storyRecyclerView.setAdapter(storyAdapter);
 
+        storyAdapter.setOnItemClickListener(new StoryAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                String title = titles.get(position);
+                showOptionsActivity(title);
+            }
+        });
+
+        return true;
     }
 
     public void showNewStoryActivity(View v){
