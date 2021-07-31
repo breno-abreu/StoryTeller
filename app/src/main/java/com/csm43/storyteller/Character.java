@@ -38,9 +38,6 @@ public class Character extends AppCompatActivity {
 
         charImage = (ImageView)findViewById(R.id.charImage);
         name = (EditText)findViewById(R.id.characterName);
-        physicalChar = (EditText)findViewById(R.id.characterPhysicalChar);
-        personality = (EditText)findViewById(R.id.characterPersonality);
-        background = (EditText)findViewById(R.id.characterBackground);
 
         Drawable drawable = charImage.getDrawable();
         BitmapDrawable bitmapDrawable = (BitmapDrawable)drawable;

@@ -1,6 +1,8 @@
 package com.csm43.storyteller;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +15,10 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    private RecyclerView storyRecyclerView;
+    private RecyclerView.Adapter storyAdapter;
+    private RecyclerView.LayoutManager storyLayoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,23 +27,21 @@ public class MainActivity extends AppCompatActivity {
         ((FileManager)this.getApplication()).createMainFolder();
 
         ArrayList<String> titles = ((FileManager)this.getApplication()).getFileNames(getExternalFilesDir(null) + "/Histórias");
+        ArrayList<StoryItem> storyList = new ArrayList<StoryItem>();
 
         if(titles != null) {
-            LinearLayout ll = (LinearLayout) findViewById(R.id.storiesLinearLayout);
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
             for (String title : titles) {
-                Button button = new Button(this);
-                button.setText(title);
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        showOptionsActivity(title);
-                    }
-                });
-                ll.addView(button, lp);
+                storyList.add(new StoryItem(title));
             }
         }
+
+        storyRecyclerView = findViewById(R.id.storyRecyclerView);
+        storyRecyclerView.setHasFixedSize(true);
+        storyLayoutManager = new LinearLayoutManager(this);
+        storyAdapter = new StoryAdapter(storyList);
+        storyRecyclerView.setLayoutManager(storyLayoutManager);
+        storyRecyclerView.setAdapter(storyAdapter);
+
     }
 
     public void showNewStoryActivity(View v){

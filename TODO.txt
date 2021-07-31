@@ -30,6 +30,7 @@ falta:
 - cmoentários e melhoria do código
 - toolbar
 - trocar por recycleview
+- remover campos dos personagens
 
 
 All:
