@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.csm43.storyteller">
 
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:name=".FileManager"
         android:allowBackup="true"
@@ -9,35 +12,43 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.StoryTeller"
-        >
+        android:theme="@style/Theme.StoryTeller">
+        <activity
+            android:name=".Recording"
+            android:exported="true" />
+        <activity
+            android:name=".RecordingList"
+            android:exported="true" />
+        <activity
+            android:name=".Recorder"
+            android:exported="true" />
         <activity
             android:name=".Chapter"
             android:label="Capítulo"
             android:parentActivityName=".ChapterList"
-            android:windowSoftInputMode="adjustPan|adjustResize"/>
+            android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name=".Location"
             android:label="Lugar"
             android:parentActivityName=".LocationList"
-            android:windowSoftInputMode="adjustPan|adjustResize"/>
+            android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name=".Character"
             android:label="Personagem"
             android:parentActivityName=".CharacterList"
-            android:windowSoftInputMode="adjustPan|adjustResize"/>
+            android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name=".ChapterList"
             android:label="Linha do Tempo"
-            android:parentActivityName=".Options"/>
+            android:parentActivityName=".Options" />
         <activity
             android:name=".LocationList"
             android:label="Lugares"
-            android:parentActivityName=".Options"/>
+            android:parentActivityName=".Options" />
         <activity
             android:name=".CharacterList"
             android:label="Personagens"
-            android:parentActivityName=".Options"/>
+            android:parentActivityName=".Options" />
         <activity
             android:name=".Options"
             android:label="Opções"

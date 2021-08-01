@@ -48,6 +48,12 @@ public class Options extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void showRecordingListActivity(View v){
+        Intent intent = new Intent(this, RecordingList.class);
+        intent.putExtra("TITLE", storyTitle);
+        startActivity(intent);
+    }
+
     public void deleteStory(View v){
         ((FileManager)this.getApplication()).deleteStoryFolder(storyTitle);
         Toast.makeText(this, "História \"" + storyTitle + "\" excluída!", Toast.LENGTH_LONG).show();

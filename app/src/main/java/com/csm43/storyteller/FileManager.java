@@ -46,6 +46,8 @@ public class FileManager extends Application {
             locations.mkdir();
             File chapters = new File(dir.getPath() + "/Capítulos");
             chapters.mkdir();
+            File recordings = new File(dir.getPath() + "/Gravações");
+            chapters.mkdir();
         }
     }
 

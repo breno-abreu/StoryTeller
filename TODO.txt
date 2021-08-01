@@ -1,13 +1,13 @@
 - verificar se há ou não histórias, nesse caso mostrar um texto dizendo que não há
-- estilo dos botões gerados dinamicamente
+- estilo dos botões gerados dinamicamente <<
 - verificar se algum título já existe
 - verificar se o título está vazio
 - adicionar vários itens e ver como a lista se comporta, ver se some da tela ou não
-- Botões com imagens
-- adicionar botão de salvar
+- Botões com imagens <<
+- adicionar botão de salvar <<
 - perguntar se quer slavar antes de voltar
-- salvar a pausar o sistema
-- mostrar mensagem quando é salvo
+- salvar ao pausar o sistema
+- mostrar mensagem quando é salvo <<
 - fazer constantes como nomes de arquivos e pastas
 - mensagnes de log para debugg
 - try excepts
@@ -20,6 +20,8 @@
 - salvar imagem básica
 - permitir duplicatas? não né, por causa das pastas
 - rename
+- mover a tela para cima ao escrever a descrição
+- permissões
 
 falta:
 - verificação de dados e mensagens
@@ -33,16 +35,15 @@ falta:
 - toolbar <<
 - trocar por recycleview <<
 - remover campos dos personagens <<
-- acrescentar mais campos
 
 
 All:
 - Storyteller 
-- Fazer sistema básico com carregamento de imagens
+- Fazer sistema básico com carregamento de imagens <<
 - Fazer telas de aviso
-- Salvar no dispositivo
+- Salvar no dispositivo <<
 - Salvar no BD
 - Usuários diferentes (criar classe estática, switch booleano que diz se é premium ou não)
 - Gravação e reprodução de áudio
-- Design deixar para depois
+- Design deixar para depois <<
 - Ver formas melhores de salvar no dispositivo
