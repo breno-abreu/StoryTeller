@@ -88,11 +88,13 @@ public class ChapterList extends AppCompatActivity {
 
     public void showChapterActivity(View v){
         Intent intent = new Intent(this, Chapter.class);
+        intent.putExtra("TITLE", storyTitle);
         startActivity(intent);
     }
 
     public void showChapterActivity(String chapterName){
         Intent intent = new Intent(this, Chapter.class);
+        intent.putExtra("TITLE", storyTitle);
         intent.putExtra("NAME", chapterName);
         startActivity(intent);
     }

@@ -14,15 +14,18 @@
         <activity
             android:name=".Chapter"
             android:label="Capítulo"
-            android:parentActivityName=".ChapterList"/>
+            android:parentActivityName=".ChapterList"
+            android:windowSoftInputMode="adjustPan|adjustResize"/>
         <activity
             android:name=".Location"
             android:label="Lugar"
-            android:parentActivityName=".LocationList"/>
+            android:parentActivityName=".LocationList"
+            android:windowSoftInputMode="adjustPan|adjustResize"/>
         <activity
             android:name=".Character"
             android:label="Personagem"
-            android:parentActivityName=".CharacterList"/>
+            android:parentActivityName=".CharacterList"
+            android:windowSoftInputMode="adjustPan|adjustResize"/>
         <activity
             android:name=".ChapterList"
             android:label="Linha do Tempo"

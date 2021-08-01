@@ -15,6 +15,7 @@ import android.view.Display;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Character extends AppCompatActivity {
@@ -25,18 +26,21 @@ public class Character extends AppCompatActivity {
     private EditText description;
     private String originalName;
     private String storyTitle;
+    private TextView titleBottom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //TODO
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character);
 
         Intent intent = getIntent();
-        storyTitle = ((FileManager)this.getApplication()).getCurrentStory();
+        storyTitle = intent.getStringExtra("TITLE");
 
-        charImage = (ImageView)findViewById(R.id.charImage);
-        name = (EditText)findViewById(R.id.characterName);
+        titleBottom = findViewById(R.id.characterTitle);
+        titleBottom.setText(storyTitle);
+
+        charImage = findViewById(R.id.charImage);
+        name = findViewById(R.id.characterName);
         description = findViewById(R.id.characterDescription);
 
         Drawable drawable = charImage.getDrawable();
@@ -47,10 +51,8 @@ public class Character extends AppCompatActivity {
             originalName = intent.getStringExtra("NAME");
             loadCharacter();
         }
-        else{
+        else
             originalName = "";
-        }
-
     }
 
     public void chooseImgFromGallery(View v){
@@ -77,6 +79,7 @@ public class Character extends AppCompatActivity {
         if(originalName.equals("") || originalName.equals(name.getText().toString())){
             ((FileManager)this.getApplication()).writeCharacter(storyTitle, name.getText().toString(),
                     description.getText().toString(), imgBitmap);
+            Toast.makeText(this, "Personagem salvo!", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -99,7 +102,15 @@ public class Character extends AppCompatActivity {
 
     public void deleteCharacter(View v){
         ((FileManager)this.getApplication()).deleteCharacter(storyTitle, name.getText().toString());
+        Toast.makeText(this, "Personagem \"" + originalName + "\" excluído!", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, CharacterList.class);
+        intent.putExtra("TITLE", storyTitle);
+        startActivity(intent);
+    }
+
+    public void goToPreviousActivity(View v){
+        Intent intent = new Intent(this, CharacterList.class);
+        intent.putExtra("TITLE", storyTitle);
         startActivity(intent);
     }
 }

@@ -59,6 +59,7 @@
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:backgroundTint="#00FFFFFF"
+        android:onClick="goToPreviousActivity"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="?attr/actionModeCloseDrawable"
@@ -71,6 +72,7 @@
         android:layout_height="55dp"
         android:layout_marginEnd="20dp"
         android:backgroundTint="#00FFFFFF"
+        android:onClick="deleteChapter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/webp_net_resizeimage__2_"
@@ -91,7 +93,7 @@
         android:id="@+id/floatingActionButton9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="25dp"
         android:layout_marginBottom="25dp"
         android:backgroundTint="#1E88E5"
         android:clickable="true"
@@ -104,7 +106,7 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/chapterTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"

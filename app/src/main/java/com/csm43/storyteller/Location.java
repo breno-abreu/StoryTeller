@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class Location extends AppCompatActivity {
     private static final int GALLERY_REQUEST_CODE = 123;
@@ -20,13 +22,18 @@ public class Location extends AppCompatActivity {
     private EditText description;
     private String originalName;
     private String storyTitle;
+    private TextView titleBottom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
 
-        storyTitle = ((FileManager)this.getApplication()).getCurrentStory();
+        Intent intent = getIntent();
+        storyTitle = intent.getStringExtra("TITLE");
+
+        titleBottom = findViewById(R.id.locationTitle);
+        titleBottom.setText(storyTitle);
 
         locationImage = (ImageView)findViewById(R.id.locationImage);
         name = (EditText)findViewById(R.id.locationName);
@@ -35,8 +42,6 @@ public class Location extends AppCompatActivity {
         Drawable drawable = locationImage.getDrawable();
         BitmapDrawable bitmapDrawable = (BitmapDrawable)drawable;
         imgBitmap = bitmapDrawable.getBitmap();
-
-        Intent intent = getIntent();
 
         if(intent.getStringExtra("NAME") != null){
             originalName = intent.getStringExtra("NAME");
@@ -71,6 +76,7 @@ public class Location extends AppCompatActivity {
         if(originalName.equals("") || originalName.equals(name.getText().toString())){
             ((FileManager)this.getApplication()).writeLocation(storyTitle, name.getText().toString(),
                     description.getText().toString(), imgBitmap);
+            Toast.makeText(this, "Lugar salvo!", Toast.LENGTH_LONG).show();
 
             //Toast.makeText(this, "Salvo", Toast.LENGTH_SHORT).show();
         }
@@ -95,7 +101,16 @@ public class Location extends AppCompatActivity {
 
     public void deleteLocation(View v){
         ((FileManager)this.getApplication()).deleteLocation(storyTitle, name.getText().toString());
+        Toast.makeText(this, "Lugar \"" + originalName + "\" excluído!", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, LocationList.class);
+        intent.putExtra("TITLE", storyTitle);
         startActivity(intent);
     }
+
+    public void goToPreviousActivity(View v){
+        Intent intent = new Intent(this, LocationList.class);
+        intent.putExtra("TITLE", storyTitle);
+        startActivity(intent);
+    }
+
 }

@@ -78,11 +78,13 @@ public class CharacterList extends AppCompatActivity {
 
     public void showCharacterActivity(View v){
         Intent intent = new Intent(this, Character.class);
+        intent.putExtra("TITLE", storyTitle);
         startActivity(intent);
     }
 
     public void showCharacterActivity(String characterName){
         Intent intent = new Intent(this, Character.class);
+        intent.putExtra("TITLE", storyTitle);
         intent.putExtra("NAME", characterName);
         startActivity(intent);
     }

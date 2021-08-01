@@ -79,11 +79,13 @@ public class LocationList extends AppCompatActivity {
 
     public void showLocationActivity(View v){
         Intent intent = new Intent(this, Location.class);
+        intent.putExtra("TITLE", storyTitle);
         startActivity(intent);
     }
 
     public void showLocationActivity(String locationName){
         Intent intent = new Intent(this, Location.class);
+        intent.putExtra("TITLE", storyTitle);
         intent.putExtra("NAME", locationName);
         startActivity(intent);
     }
