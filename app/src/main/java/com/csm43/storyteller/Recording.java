@@ -81,8 +81,8 @@ public class Recording extends AppCompatActivity {
                 stopButton.setEnabled(true);
                 statusText.setText("Pausado");
             }
-        }catch(Exception we){
-            we.printStackTrace();
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 

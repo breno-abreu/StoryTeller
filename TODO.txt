@@ -22,12 +22,13 @@
 - rename
 - mover a tela para cima ao escrever a descrição
 - permissões
+- Pausar execução do áudio
 
 falta:
 - verificação de dados e mensagens
 - banco de dados
 - usuários
-- áudio
+- áudio <<
 - design
 - bugs
 - testes
@@ -35,6 +36,7 @@ falta:
 - toolbar <<
 - trocar por recycleview <<
 - remover campos dos personagens <<
+- ciclo de vida, áudios, aruqivos sem salvar, etc
 
 
 All:
@@ -44,6 +46,6 @@ All:
 - Salvar no dispositivo <<
 - Salvar no BD
 - Usuários diferentes (criar classe estática, switch booleano que diz se é premium ou não)
-- Gravação e reprodução de áudio
+- Gravação e reprodução de áudio <<
 - Design deixar para depois <<
-- Ver formas melhores de salvar no dispositivo
+- Ver formas melhores de salvar no dispositivo (talvez assim esteja bom já) <<
