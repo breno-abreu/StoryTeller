@@ -46,13 +46,15 @@
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:backgroundTint="#00FFFFFF"
+        android:onClick="goToPreviousActivity"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="?attr/actionModeCloseDrawable"
-        tools:ignore="SpeakableTextPresentCheck"
-        app:tint="#FFFFFF" />
+        app:tint="#FFFFFF"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recordingsRecyclerView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,35 +69,49 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="11dp"
         android:fontFamily="@font/gabriela"
-        android:text="TextView"
+        android:text="Gravações"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/imageButton15"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton2"
+        android:id="@+id/startRecording"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="25dp"
         android:backgroundTint="#43A047"
         android:clickable="true"
+        android:onClick="startRecording"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_btn_speak_now"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton5"
+        android:id="@+id/stopRecording"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="90dp"
         android:backgroundTint="#E53935"
         android:clickable="true"
+        android:onClick="stopRecording"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/stat_notify_call_mute"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/recordingsEmptyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:text="TextView"
+        android:textColor="#AFAEAE"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar9" />
 </androidx.constraintlayout.widget.ConstraintLayout>

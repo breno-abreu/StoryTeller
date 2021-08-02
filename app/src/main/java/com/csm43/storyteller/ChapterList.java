@@ -13,9 +13,9 @@ import java.util.ArrayList;
 
 public class ChapterList extends AppCompatActivity {
     private String storyTitle;
-    private RecyclerView storyRecyclerView;
-    private StoryAdapter storyAdapter;
-    private RecyclerView.LayoutManager storyLayoutManager;
+    private RecyclerView recyclerView;
+    private StoryAdapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
     private TextView titleBottom;
     private TextView emptyText;
 
@@ -36,23 +36,6 @@ public class ChapterList extends AppCompatActivity {
             emptyText.setText("");
         else
             emptyText.setText("Nenhum capítulo a ser exibido");
-
-        /*if(names != null) {
-            LinearLayout ll = (LinearLayout) findViewById(R.id.chaptersLinearLayout);
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-            for (String name : names) {
-                Button button = new Button(this);
-                button.setText(name);
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        showChapterActivity(name);
-                    }
-                });
-                ll.addView(button, lp);
-            }
-        }*/
     }
 
     public boolean buildRecyclerView(){
@@ -68,14 +51,14 @@ public class ChapterList extends AppCompatActivity {
         else
             return false;
 
-        storyRecyclerView = findViewById(R.id.chapterRecyclerView);
-        storyRecyclerView.setHasFixedSize(true);
-        storyLayoutManager = new LinearLayoutManager(this);
-        storyAdapter = new StoryAdapter(list);
-        storyRecyclerView.setLayoutManager(storyLayoutManager);
-        storyRecyclerView.setAdapter(storyAdapter);
+        recyclerView = findViewById(R.id.chapterRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        adapter = new StoryAdapter(list);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
 
-        storyAdapter.setOnItemClickListener(new StoryAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new StoryAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 String title = names.get(position);

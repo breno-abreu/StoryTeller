@@ -33,11 +33,12 @@
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:backgroundTint="#00FFFFFF"
+        android:onClick="goToPreviousActivity"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="?attr/actionModeCloseDrawable"
-        tools:ignore="SpeakableTextPresentCheck"
-        app:tint="#FFFEFE" />
+        app:tint="#FFFEFE"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/imageButton17"
@@ -45,30 +46,32 @@
         android:layout_height="55sp"
         android:layout_marginEnd="20dp"
         android:backgroundTint="#00FFFFFF"
+        android:onClick="deleteRecording"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/webp_net_resizeimage__2_"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/recordingFileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="75dp"
         android:text="TextView"
         android:textColor="#606060"
-        android:textSize="34sp"
+        android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar19" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton8"
+        android:id="@+id/playAudio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:backgroundTint="#1E88E5"
         android:clickable="true"
+        android:onClick="playAudio"
         app:layout_constraintBottom_toTopOf="@+id/toolbar20"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,33 +79,35 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton10"
+        android:id="@+id/pauseAudio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginBottom="50dp"
         android:backgroundTint="#1E88E5"
         android:clickable="true"
+        android:onClick="pauseAudio"
         app:layout_constraintBottom_toTopOf="@+id/toolbar20"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/pause"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton12"
+        android:id="@+id/stopAudio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="50dp"
         android:backgroundTint="#1E88E5"
         android:clickable="true"
+        android:onClick="stopAudio"
         app:layout_constraintBottom_toTopOf="@+id/toolbar20"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/stop"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/recordingTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
@@ -115,7 +120,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/recordingStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

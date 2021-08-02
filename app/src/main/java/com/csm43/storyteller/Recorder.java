@@ -33,10 +33,10 @@ public class Recorder extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recorder);
 
-        startRecordingButton = findViewById(R.id.startRecording);
-        stopRecordingButton = findViewById(R.id.stopRecording);
-        playAudioButton = findViewById(R.id.playAudio);
-        stopAudioButton = findViewById(R.id.stopAudio);
+        startRecordingButton = findViewById(R.id.startRecordingbbbbb);
+        stopRecordingButton = findViewById(R.id.bbbbbbbb);
+        playAudioButton = findViewById(R.id.aaaaa);
+        stopAudioButton = findViewById(R.id.ssssss);
 
         if(!checkPermissionFromDevice()){
             requestPermission();
@@ -76,7 +76,7 @@ public class Recorder extends AppCompatActivity {
             mediaPlayer.start();
             Toast.makeText(this, "Executando Áudio", Toast.LENGTH_SHORT).show();
         } catch (IOException e){
-            Log.d("breo", "prepare() fail");
+            Log.d("breno", "prepare() fail");
         }
     }
 

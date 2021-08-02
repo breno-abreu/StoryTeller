@@ -47,7 +47,7 @@ public class FileManager extends Application {
             File chapters = new File(dir.getPath() + "/Capítulos");
             chapters.mkdir();
             File recordings = new File(dir.getPath() + "/Gravações");
-            chapters.mkdir();
+            recordings.mkdir();
         }
     }
 
@@ -81,6 +81,11 @@ public class FileManager extends Application {
 
     public void deleteChapter(String storyTitle, String name){
         File dir = new File(getExternalFilesDir(null) + "/Histórias/" + storyTitle + "/Capítulos/" + name);
+        deleteRecursively(dir);
+    }
+
+    public void deleteRecording(String storyTitle, String name){
+        File dir = new File(getExternalFilesDir(null) + "/Histórias/" + storyTitle + "/Gravações/" + name);
         deleteRecursively(dir);
     }
 
