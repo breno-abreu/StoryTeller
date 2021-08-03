@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showNewStoryActivity(View v){
-        Intent intent = new Intent(this, SQLTest.class);
+        Intent intent = new Intent(this, ServerStoryList.class);
         startActivity(intent);
     }
 

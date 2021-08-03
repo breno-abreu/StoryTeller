@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+// https://www.youtube.com/watch?v=X8oD4q3XtQQ&ab_channel=CodesEasy, ver github
 public class SQLTest extends AppCompatActivity {
     private EditText text;
 

@@ -1,0 +1,7 @@
+hoje:
+
+- usuário (botão switch, não está ligado ao servidor)
+- funções php (puxar o nome das histórias salvas, fazer upload, e fazer download) <<
+- funções android
+- views
+- testes

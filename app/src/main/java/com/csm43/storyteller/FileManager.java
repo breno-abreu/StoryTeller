@@ -5,6 +5,7 @@ import android.app.Application;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 
 public class FileManager extends Application {
     private String currentStory;
+    private String sqlResult;
 
     public String getCurrentStory(){
         return currentStory;
@@ -30,10 +32,15 @@ public class FileManager extends Application {
     public void createMainFolder(){
         File dir = new File(getExternalFilesDir(null) + "/Histórias");
         if(!dir.exists())
-            if(dir.mkdir())
-                Log.d("BRENO", "Diretório Criado");
-            else
-                Log.d("BRENO", "Diretório Não Foi Criado");
+            dir.mkdir();
+    }
+
+    public String getSqlResult(){
+        return sqlResult;
+    }
+
+    public void setSqlResult(String result){
+        this.sqlResult = result;
     }
 
     public void createStoryFolder(String title){

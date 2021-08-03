@@ -18,17 +18,20 @@ import java.net.URLEncoder;
 public class PutData extends Thread {
     private String url;
     private String method;
-    String result_data = "";
-    String[] data;
-    String[] field;
+    private String result_data = "";
+    public static String staticResult;
+    private String[] data;
+    private String[] field;
 
     public PutData(String url, String method, String[] field, String[] data) {
         this.url = url;
         this.method = method;
-        this.data = new String[data.length];
-        this.field = new String[field.length];
-        System.arraycopy(field, 0, this.field, 0, field.length);
-        System.arraycopy(data, 0, this.data, 0, data.length);
+        if(field != null && data != null) {
+            this.data = new String[data.length];
+            this.field = new String[field.length];
+            System.arraycopy(field, 0, this.field, 0, field.length);
+            System.arraycopy(data, 0, this.data, 0, data.length);
+        }
     }
 
     @Override
@@ -43,8 +46,10 @@ public class PutData extends Thread {
             OutputStream outputStream = httpURLConnection.getOutputStream();
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, UTF8));
             StringBuilder post_data = new StringBuilder();
-            for (int i = 0; i < this.field.length; i++) {
-                post_data.append(URLEncoder.encode(this.field[i], "UTF-8")).append("=").append(URLEncoder.encode(this.data[i], UTF8)).append("&");
+            if(this.field != null){
+                for (int i = 0; i < this.field.length; i++) {
+                    post_data.append(URLEncoder.encode(this.field[i], "UTF-8")).append("=").append(URLEncoder.encode(this.data[i], UTF8)).append("&");
+                }
             }
             bufferedWriter.write(post_data.toString());
             bufferedWriter.flush();
@@ -61,10 +66,8 @@ public class PutData extends Thread {
             inputStream.close();
             httpURLConnection.disconnect();
             setData(result.toString());
-            //Log.d("breno", "aqui");
         } catch (IOException e) {
             setData(e.toString());
-            //Log.d("breno", "aquiaaaaaaa");
         }
     }
 
@@ -86,6 +89,7 @@ public class PutData extends Thread {
     }
 
     public void setData(String result_data) {
+        staticResult = result_data;
         this.result_data = result_data;
     }
 }
