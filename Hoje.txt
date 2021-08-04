@@ -4,7 +4,7 @@ hoje:
 - testar as fuções de download e upload
 - criar interface de upload e download
 - criar usuários diferentes
-- ciclo de vida
+- ciclo de vida (acho que não vai dar tempo)
 - mensagens ao excluir
 - tela de loading ao fazer download e upload
 - mudar símbolo de seta do dowload do servidor <<

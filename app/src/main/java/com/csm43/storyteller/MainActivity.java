@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,12 +17,24 @@ public class MainActivity extends AppCompatActivity {
     private StoryAdapter storyAdapter;
     private RecyclerView.LayoutManager storyLayoutManager;
     private TextView emptyText;
+    private TextView userType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ((FileManager)this.getApplication()).createMainFolder();
+
+        userType = findViewById(R.id.userType);
+
+        Intent intent = getIntent();
+        String user = intent.getStringExtra("USER");
+
+        if(user == null)
+            user = "basic";
+
+        userType.setText(user);
+        ((FileManager)this.getApplication()).setUser(user);
 
         emptyText = findViewById(R.id.mainEmptyText);
 
@@ -69,6 +82,12 @@ public class MainActivity extends AppCompatActivity {
     public void showOptionsActivity(String title) {
         Intent intent = new Intent(this, Options.class);
         intent.putExtra("TITLE", title);
+        startActivity(intent);
+    }
+
+    public void showChangeUserActivity(View v){
+        Intent intent = new Intent(this,ChangeUser.class);
+        intent.putExtra("USER", ((FileManager)this.getApplication()).getUser());
         startActivity(intent);
     }
 }

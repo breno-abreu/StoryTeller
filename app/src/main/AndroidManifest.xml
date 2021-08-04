@@ -16,6 +16,9 @@
         android:theme="@style/Theme.StoryTeller"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ChangeUser"
+            android:exported="true" />
+        <activity
             android:name=".ServerStoryList"
             android:exported="true" />
         <activity

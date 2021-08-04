@@ -18,14 +18,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class FileManager extends Application {
-    private boolean isPremium;
+    private String user;
 
-    public void setIsPremium(boolean value){
-        isPremium = value;
+    public void setUser(String value){
+        user = value;
     }
 
-    public boolean getIsPremium(){
-        return isPremium;
+    public String getUser(){
+        return user;
     }
 
     public void createMainFolder(){

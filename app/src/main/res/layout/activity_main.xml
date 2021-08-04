@@ -37,18 +37,19 @@
         android:layout_height="55dp"
         android:layout_marginEnd="20dp"
         android:backgroundTint="#00FFFFFF"
+        android:onClick="showChangeUserActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/webp_net_resizeimage__1_"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
-        android:id="@+id/userName"
+        android:id="@+id/userType"
         android:layout_width="145dp"
         android:layout_height="26dp"
         android:layout_marginTop="17dp"
         android:layout_marginEnd="5dp"
-        android:fontFamily="casual"
+        android:fontFamily="@font/architects_daughter"
         android:text="basic"
         android:textAlignment="viewEnd"
         android:textColor="#FFFFFF"
