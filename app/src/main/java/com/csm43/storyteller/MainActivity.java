@@ -27,14 +27,11 @@ public class MainActivity extends AppCompatActivity {
 
         userType = findViewById(R.id.userType);
 
-        Intent intent = getIntent();
-        String user = intent.getStringExtra("USER");
+        //Intent intent = getIntent();
+        //String user = intent.getStringExtra("USER");
 
-        if(user == null)
-            user = "basic";
-
+        String user = ((FileManager)this.getApplication()).getUser();
         userType.setText(user);
-        ((FileManager)this.getApplication()).setUser(user);
 
         emptyText = findViewById(R.id.mainEmptyText);
 
@@ -75,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showNewStoryActivity(View v){
-        Intent intent = new Intent(this, ServerStoryList.class);
+        Intent intent = new Intent(this, NewStory.class);
         startActivity(intent);
     }
 
@@ -88,6 +85,11 @@ public class MainActivity extends AppCompatActivity {
     public void showChangeUserActivity(View v){
         Intent intent = new Intent(this,ChangeUser.class);
         intent.putExtra("USER", ((FileManager)this.getApplication()).getUser());
+        startActivity(intent);
+    }
+
+    public void showServerStoryListActivity(View v){
+        Intent intent = new Intent(this, ServerStoryList.class);
         startActivity(intent);
     }
 }

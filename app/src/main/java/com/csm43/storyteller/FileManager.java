@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class FileManager extends Application {
-    private String user;
+    private String user = "basic";
 
     public void setUser(String value){
         user = value;

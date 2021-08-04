@@ -69,79 +69,158 @@ public class Options extends AppCompatActivity {
         startActivity(mainActivity);
     }
 
-    public void uploadStory(View v){
+    public void uploadStory(View v) {
         deleteStoryOnServer(storyTitle);
-        ArrayList<String> characters = ((FileManager)this.getApplication()).getFileNames(getExternalFilesDir(null) + "/Histórias/" + storyTitle + "/Personagens");
-        for(String character : characters){
-            String name = ((FileManager)this.getApplication()).loadFile(storyTitle, "Personagens", character, "nome.stf");
-            String description = ((FileManager)this.getApplication()).loadFile(storyTitle, "Personagens", character, "descrição.stf");
-            sendDataToServer(storyTitle, "personagens", name, description);
+        sendTitleToServer(storyTitle);
+
+        ArrayList<String> characters = ((FileManager) this.getApplication()).getFileNames(getExternalFilesDir(null) + "/Histórias/" + storyTitle + "/Personagens");
+        if(characters != null) {
+            for (String character : characters) {
+                String name = ((FileManager) this.getApplication()).loadFile(storyTitle, "Personagens", character, "nome.stf");
+                String description = ((FileManager) this.getApplication()).loadFile(storyTitle, "Personagens", character, "descrição.stf");
+                sendDataToServer(storyTitle, "personagens", name, description);
+            }
         }
 
         ArrayList<String> locations = ((FileManager)this.getApplication()).getFileNames(getExternalFilesDir(null) + "/Histórias/" + storyTitle + "/Lugares");
-        for(String location : locations){
-            String name = ((FileManager)this.getApplication()).loadFile(storyTitle, "Lugares", location, "nome.stf");
-            String description = ((FileManager)this.getApplication()).loadFile(storyTitle, "Lugares", location, "descrição.stf");
-            sendDataToServer(storyTitle, "lugares", name, description);
+        if(locations != null) {
+            for (String location : locations) {
+                String name = ((FileManager) this.getApplication()).loadFile(storyTitle, "Lugares", location, "nome.stf");
+                String description = ((FileManager) this.getApplication()).loadFile(storyTitle, "Lugares", location, "descrição.stf");
+                sendDataToServer(storyTitle, "lugares", name, description);
+            }
         }
 
         ArrayList<String> chapters = ((FileManager)this.getApplication()).getFileNames(getExternalFilesDir(null) + "/Histórias/" + storyTitle + "/Capítulos");
-        for(String chapter : chapters){
-            String name = ((FileManager)this.getApplication()).loadFile(storyTitle, "Capítulos", chapter, "nome.stf");
-            String description = ((FileManager)this.getApplication()).loadFile(storyTitle, "Capítulos", chapter, "descrição.stf");
-            sendDataToServer(storyTitle, "capitulos", name, description);
+        if (chapters != null) {
+            for (String chapter : chapters) {
+                String name = ((FileManager) this.getApplication()).loadFile(storyTitle, "Capítulos", chapter, "nome.stf");
+                String description = ((FileManager) this.getApplication()).loadFile(storyTitle, "Capítulos", chapter, "descrição.stf");
+                sendDataToServer(storyTitle, "capitulos", name, description);
+            }
         }
+
+        Toast.makeText(this, "História: \"" + storyTitle + "\" salva no servidor!", Toast.LENGTH_LONG).show();
     }
 
     public void deleteStoryOnServer(String story){
-        Handler handler = new Handler();
-        handler.post(new Runnable() {
+        Runnable task = new Runnable() {
             @Override
             public void run() {
-                String[] fields = new String[1];
-                fields[0] = "story";
+                synchronized (this) {
+                    String[] fields = new String[1];
+                    fields[0] = "story";
 
-                String[] data = new String[1];
-                data[0] = story;
+                    String[] data = new String[1];
+                    data[0] = story;
 
-                PutData putData = new PutData("http://192.168.15.144/StoryTeller/delete_story.php", "POST", fields, data);
-                if (putData.startPut()) {
-                    if (putData.onComplete()) {
-                        String result = putData.getResult();
-                        //((FileManager)getApplication()).writeTempFile(result);
-                        //TODO mensagem
+                    PutData putData = new PutData("http://192.168.15.144/StoryTeller/delete_story.php", "POST", fields, data);
+                    if (putData.startPut()) {
+                        if (putData.onComplete()) {
+                            String result = putData.getResult();
+                            //((FileManager)getApplication()).writeTempFile(result);
+                            //TODO mensagem
+                        }
                     }
+                    notify();
                 }
             }
-        });
+        };
+
+        Thread thread = new Thread(task);
+        thread.start();
+
+        //handler.post(task);
+        synchronized (task){
+            try{
+                task.wait();
+            }
+            catch(InterruptedException e){
+                e.printStackTrace();
+            }
+        }
     }
 
     public void sendDataToServer(String story, String table, String name, String description){
-        Handler handler = new Handler();
-        handler.post(new Runnable() {
+        Runnable task = new Runnable() {
             @Override
             public void run() {
-                String[] fields = new String[4];
-                fields[0] = "story";
-                fields[1] = "table";
-                fields[2] = "name";
-                fields[3] = "description";
+                synchronized (this) {
+                    String[] fields = new String[4];
+                    fields[0] = "story";
+                    fields[1] = "table";
+                    fields[2] = "name";
+                    fields[3] = "description";
 
-                String[] data = new String[4];
-                data[0] = story;
-                data[1] = table;
-                data[2] = name;
-                data[3] = description;
+                    String[] data = new String[4];
+                    data[0] = story;
+                    data[1] = table;
+                    data[2] = name;
+                    data[3] = description;
 
-                PutData putData = new PutData("http://192.168.15.144/StoryTeller/set_info.php", "POST", fields, data);
-                if (putData.startPut()) {
-                    if (putData.onComplete()) {
-                        String result = putData.getResult();
-                        //((FileManager)getApplication()).writeTempFile(result);
-                        //TODO mensagem
+                    PutData putData = new PutData("http://192.168.15.144/StoryTeller/set_info.php", "POST", fields, data);
+                    if (putData.startPut()) {
+                        if (putData.onComplete()) {
+                            String result = putData.getResult();
+                            //((FileManager)getApplication()).writeTempFile(result);
+                            //TODO mensagem
+                        }
                     }
+                    notify();
                 }
             }
-        });
+        };
+
+        Thread thread = new Thread(task);
+        thread.start();
+
+        //handler.post(task);
+        synchronized (task){
+            try{
+                task.wait();
+            }
+            catch(InterruptedException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void sendTitleToServer(String story){
+        Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                synchronized (this) {
+                    String[] fields = new String[1];
+                    fields[0] = "story";
+
+                    String[] data = new String[1];
+                    data[0] = story;
+
+                    PutData putData = new PutData("http://192.168.15.144/StoryTeller/set_title.php", "POST", fields, data);
+                    if (putData.startPut()) {
+                        if (putData.onComplete()) {
+                            String result = putData.getResult();
+                            //((FileManager)getApplication()).writeTempFile(result);
+                            //TODO mensagem
+                        }
+                    }
+                    notify();
+                }
+            }
+        };
+
+        Thread thread = new Thread(task);
+        thread.start();
+
+        //handler.post(task);
+        synchronized (task){
+            try{
+                task.wait();
+            }
+            catch(InterruptedException e){
+                e.printStackTrace();
+            }
+        }
+
     }
 }

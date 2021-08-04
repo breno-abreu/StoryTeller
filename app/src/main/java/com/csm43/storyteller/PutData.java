@@ -19,7 +19,6 @@ public class PutData extends Thread {
     private String url;
     private String method;
     private String result_data = "";
-    public static String staticResult;
     private String[] data;
     private String[] field;
 
@@ -56,7 +55,7 @@ public class PutData extends Thread {
             bufferedWriter.close();
             outputStream.close();
             InputStream inputStream = httpURLConnection.getInputStream();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, iso));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, UTF8));
             StringBuilder result = new StringBuilder();
             String result_line;
             while ((result_line = bufferedReader.readLine()) != null) {
@@ -89,7 +88,6 @@ public class PutData extends Thread {
     }
 
     public void setData(String result_data) {
-        staticResult = result_data;
         this.result_data = result_data;
     }
 }

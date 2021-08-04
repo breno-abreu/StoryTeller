@@ -1,8 +1,8 @@
 hoje:
 
-- criar banco de dados
+- criar banco de dados <<
 - testar as fuções de download e upload
-- criar interface de upload e download
+- criar interface de upload e download <<
 - criar usuários diferentes
 - ciclo de vida (acho que não vai dar tempo)
 - mensagens ao excluir
@@ -10,3 +10,6 @@ hoje:
 - mudar símbolo de seta do dowload do servidor <<
 - substituir a classe filemanager por uma não global (melhor deixar assim) <<
 - excluir classes auxiliares <<
+- soft keyboard
+- aumentar texto quando escrvo em um multiline edittext
+- limpar arquivo temp ao finalizar o uso com ele

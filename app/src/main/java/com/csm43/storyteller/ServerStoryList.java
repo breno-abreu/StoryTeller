@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,7 +35,7 @@ public class ServerStoryList extends AppCompatActivity {
     }
 
     public boolean buildRecyclerView(){
-        ArrayList<String> titles = getTitlesOnServer();
+        ArrayList<String> titles = getTitlesFromServer();
         ArrayList<Item> list = new ArrayList<Item>();
 
         if(titles != null && titles.size() != 0) {
@@ -62,20 +64,37 @@ public class ServerStoryList extends AppCompatActivity {
         return true;
     }
 
-    public ArrayList<String> getTitlesOnServer(){
+    public ArrayList<String> getTitlesFromServer(){
         Handler handler = new Handler();
-        handler.post(new Runnable() {
+
+        Runnable task = new Runnable() {
             @Override
             public void run() {
-                PutData putData = new PutData("http://192.168.15.144/StoryTeller/get_story_list.php", "POST", null, null);
-                if (putData.startPut()) {
-                    if (putData.onComplete()) {
-                        String result = putData.getResult();
-                        ((FileManager)getApplication()).writeTempFile(result);
+                synchronized (this) {
+                    PutData putData = new PutData("http://192.168.15.144/StoryTeller/get_story_list.php", "POST", null, null);
+                    if (putData.startPut()) {
+                        if (putData.onComplete()) {
+                            String result = putData.getResult();
+                            ((FileManager) getApplication()).writeTempFile(result);
+                        }
                     }
+                    notify();
                 }
             }
-        });
+        };
+
+        Thread thread = new Thread(task);
+        thread.start();
+
+        //handler.post(task);
+        synchronized(task){
+            try{
+                task.wait();
+            }
+            catch(InterruptedException e){
+                e.printStackTrace();
+            }
+        }
 
         String text = ((FileManager)getApplication()).loadTempFile();
 
@@ -86,28 +105,45 @@ public class ServerStoryList extends AppCompatActivity {
         return null;
     }
     // https://www.youtube.com/watch?v=X8oD4q3XtQQ&ab_channel=CodesEasy, ver github
-    public ArrayList<ArrayList<String>> getDataFromServer(String title, String table){
-        Handler handler = new Handler();
-        handler.post(new Runnable() {
+    public ArrayList<ArrayList<String>> getDataFromServer(String title, String table) {
+        //Handler handler = new Handler();
+        Runnable task = new Runnable() {
             @Override
             public void run() {
-                String[] fields = new String[2];
-                fields[0] = "story";
-                fields[1] = "table";
+                synchronized (this) {
+                    String[] fields = new String[2];
+                    fields[0] = "story";
+                    fields[1] = "table";
 
-                String[] data = new String[2];
-                data[0] = title;
-                data[1] = table;
+                    String[] data = new String[2];
+                    data[0] = title;
+                    data[1] = table;
 
-                PutData putData = new PutData("http://192.168.15.144/StoryTeller/get_info.php", "POST", fields, data);
-                if (putData.startPut()) {
-                    if (putData.onComplete()) {
-                        String result = putData.getResult();
-                        ((FileManager)getApplication()).writeTempFile(result);
+                    PutData putData = new PutData("http://192.168.15.144/StoryTeller/get_info.php", "POST", fields, data);
+                    String result = "";
+                    if (putData.startPut()) {
+                        if (putData.onComplete()) {
+                            result = putData.getResult();
+                            ((FileManager) getApplication()).writeTempFile(result);
+                        }
                     }
+                    notify();
                 }
             }
-        });
+        };
+
+        Thread thread = new Thread(task);
+        thread.start();
+
+        //handler.post(task);
+        synchronized (task){
+            try{
+                task.wait();
+            }
+            catch(InterruptedException e){
+                e.printStackTrace();
+            }
+        }
 
         String text = ((FileManager)this.getApplication()).loadTempFile();
         ArrayList<ArrayList<String>> allInfo = new ArrayList<ArrayList<String>>();
@@ -124,23 +160,31 @@ public class ServerStoryList extends AppCompatActivity {
         return null;
     }
 
-    public void writeFiles(String title){
+    public void writeFiles(String title) {
         ((FileManager)this.getApplication()).createStoryFolder(title);
         ArrayList<ArrayList<String>> characters = getDataFromServer(title, "personagens");
         ArrayList<ArrayList<String>> locations = getDataFromServer(title, "lugares");
         ArrayList<ArrayList<String>> chapters = getDataFromServer(title, "capitulos");
 
-        for(ArrayList<String> info : characters){
-            ((FileManager)this.getApplication()).writeCharacter(title, info.get(0), info.get(1), null);
+        if(characters != null){
+            for(ArrayList<String> info : characters){
+                ((FileManager)this.getApplication()).writeCharacter(title, info.get(0), info.get(1), null);
+            }
         }
 
-        for(ArrayList<String> info : locations){
-            ((FileManager)this.getApplication()).writeLocation(title, info.get(0), info.get(1), null);
+        if(locations != null) {
+            for (ArrayList<String> info : locations) {
+                ((FileManager) this.getApplication()).writeLocation(title, info.get(0), info.get(1), null);
+            }
         }
 
-        for(ArrayList<String> info : chapters){
-            ((FileManager)this.getApplication()).writeChapter(title, info.get(0), info.get(1));
+        if(chapters != null) {
+            for (ArrayList<String> info : chapters) {
+                ((FileManager) this.getApplication()).writeChapter(title, info.get(0), info.get(1));
+            }
         }
+
+        Toast.makeText(this, "História: \"" + title + "\" baixada!", Toast.LENGTH_LONG).show();
     }
 
     public void goToPreviousActivity(View v){

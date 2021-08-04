@@ -31,9 +31,9 @@ public class ChangeUser extends AppCompatActivity {
     public void goToPreviousActivity(View v){
         Intent intent = new Intent(this, MainActivity.class);
         if(userSwitch.isChecked())
-            intent.putExtra("USER", "premium");
+            ((FileManager)this.getApplication()).setUser("premium");
         else
-            intent.putExtra("USER", "basic");
+            ((FileManager)this.getApplication()).setUser("basic");
 
         startActivity(intent);
     }
