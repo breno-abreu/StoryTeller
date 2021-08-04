@@ -38,7 +38,7 @@ public class ServerStoryList extends AppCompatActivity {
 
         if(titles != null && titles.size() != 0) {
             for (String title : titles) {
-                list.add(new Item(title, R.drawable.database));
+                list.add(new Item(title, R.drawable.database, R.drawable.arrow_down));
             }
         }
         else

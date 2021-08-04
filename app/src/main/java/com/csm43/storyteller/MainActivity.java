@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(titles != null && titles.size() != 0) {
             for (String title : titles) {
-                storyList.add(new Item(title, R.drawable.book));
+                storyList.add(new Item(title, R.drawable.book, R.drawable.arrow_right));
             }
         }
         else

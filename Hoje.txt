@@ -7,6 +7,6 @@ hoje:
 - ciclo de vida
 - mensagens ao excluir
 - tela de loading ao fazer download e upload
-- mudar símbolo de seta do dowload do servidor
+- mudar símbolo de seta do dowload do servidor <<
 - substituir a classe filemanager por uma não global (melhor deixar assim) <<
 - excluir classes auxiliares <<

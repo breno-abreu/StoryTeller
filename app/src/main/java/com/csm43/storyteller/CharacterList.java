@@ -52,7 +52,7 @@ public class CharacterList extends AppCompatActivity {
 
         if(names != null && names.size() != 0) {
             for (String name : names) {
-                list.add(new Item(name, R.drawable.character));
+                list.add(new Item(name, R.drawable.character, R.drawable.arrow_right));
             }
         }
         else

@@ -45,7 +45,7 @@ public class ChapterList extends AppCompatActivity {
 
         if(names != null && names.size() != 0) {
             for (String name : names) {
-                list.add(new Item(name, R.drawable.chapter));
+                list.add(new Item(name, R.drawable.chapter, R.drawable.arrow_right));
             }
         }
         else

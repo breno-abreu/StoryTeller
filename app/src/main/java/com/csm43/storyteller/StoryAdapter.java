@@ -1,5 +1,6 @@
 package com.csm43.storyteller;
 
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
         Item currentItem = storyList.get(position);
         holder.storyTitle.setText(currentItem.getTitle());
         holder.image.setImageResource(currentItem.getImageId());
+        holder.arrow.setImageResource(currentItem.getArrowId());
     }
 
     @Override
@@ -49,12 +51,14 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
     public static class StoryViewHolder extends RecyclerView.ViewHolder{
         public TextView storyTitle;
         public ImageView image;
+        public ImageView arrow;
 
         public StoryViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
 
             storyTitle = itemView.findViewById(R.id.itemTitle);
             image = itemView.findViewById(R.id.itemImg);
+            arrow = itemView.findViewById(R.id.itemArrow);
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
