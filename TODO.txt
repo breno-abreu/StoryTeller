@@ -1,19 +1,19 @@
-- verificar se há ou não histórias, nesse caso mostrar um texto dizendo que não há
+- verificar se há ou não histórias, nesse caso mostrar um texto dizendo que não há <<
 - estilo dos botões gerados dinamicamente <<
-- verificar se algum título já existe
-- verificar se o título está vazio
+- verificar se algum título já existe (não vai dar tempo)
+- verificar se o título está vazio (não vai dar tempo)
 - adicionar vários itens e ver como a lista se comporta, ver se some da tela ou não
 - Botões com imagens <<
 - adicionar botão de salvar <<
-- perguntar se quer slavar antes de voltar
-- salvar ao pausar o sistema
+- perguntar se quer slavar antes de voltar (não vai dar tempo)
+- salvar ao pausar o sistema (não vai dar tempo)
 - mostrar mensagem quando é salvo <<
-- fazer constantes como nomes de arquivos e pastas
-- mensagnes de log para debugg
-- try excepts
-- trocar nome da pasta ao mudar o nome do persongaem
+- fazer constantes como nomes de arquivos e pastas (não vai dar tempo)
+- mensagnes de log para debugg (não vai dar tempo)
+- try excepts (já tem)
+- trocar nome da pasta ao mudar o nome do persongaem (não vai dar tempo)
 - ver problema ao trocar o texto ele troca a imagem também <<
-- ao mudar de tela, salvar as informações que o usuário colocou, ciclo de vida
+- ao mudar de tela, salvar as informações que o usuário colocou, ciclo de vida (talvez)
 - ao criar um usuário, guardar informações no dispositivo, quando acessar de novo, 
 	procurar nesses arquivos, caso não encontre procurar no servidor
 - salvar antes de sair da página, antres de voltar
@@ -23,13 +23,16 @@
 - mover a tela para cima ao escrever a descrição
 - permissões
 - Pausar execução do áudio
+- mudar símbolo da seta no download do servidor (não vai dar tempo)
+- substituir a classe filemanager para uma classe não global
+- ducplicatas no servidor -> excluir todas as informações nas tabelas sobre uma história antes de fazer upload
 
 falta:
 - verificação de dados e mensagens
 - banco de dados
 - usuários
 - áudio <<
-- design
+- design <<
 - bugs
 - testes
 - cmoentários e melhoria do código

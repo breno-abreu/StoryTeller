@@ -18,29 +18,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class FileManager extends Application {
-    private String currentStory;
-    private String sqlResult;
+    private boolean isPremium;
 
-    public String getCurrentStory(){
-        return currentStory;
+    public void setIsPremium(boolean value){
+        isPremium = value;
     }
 
-    public void setCurrentStory(String story){
-        currentStory = story;
+    public boolean getIsPremium(){
+        return isPremium;
     }
 
     public void createMainFolder(){
         File dir = new File(getExternalFilesDir(null) + "/Histórias");
         if(!dir.exists())
             dir.mkdir();
-    }
-
-    public String getSqlResult(){
-        return sqlResult;
-    }
-
-    public void setSqlResult(String result){
-        this.sqlResult = result;
     }
 
     public void createStoryFolder(String title){
@@ -111,7 +102,8 @@ public class FileManager extends Application {
         }
         writeFile(dir.getPath(), "nome.stf", name);
         writeFile(dir.getPath(), "descrição.stf", description);
-        writeImage(dir.getPath(), "img.png", imgBitmap);
+        if(imgBitmap != null)
+            writeImage(dir.getPath(), "img.png", imgBitmap);
     }
 
     public void writeLocation(String storyTitle, String name, String description, Bitmap imgBitmap){
@@ -121,7 +113,8 @@ public class FileManager extends Application {
         }
         writeFile(dir.getPath(), "nome.stf", name);
         writeFile(dir.getPath(), "descrição.stf", description);
-        writeImage(dir.getPath(), "img.png", imgBitmap);
+        if(imgBitmap != null)
+            writeImage(dir.getPath(), "img.png", imgBitmap);
     }
 
     public void writeChapter(String storyTitle, String name, String description){
@@ -153,6 +146,16 @@ public class FileManager extends Application {
         }
     }
 
+    public void writeTempFile(String content){
+        File file = new File(getExternalFilesDir(null) + "/tmp.txt");
+        try (FileOutputStream nameStream = new FileOutputStream(file)) {
+            nameStream.write(content.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public String loadFile(String storyTitle, String option, String name, String field){
         String path = getExternalFilesDir(null) + "/Histórias/" + storyTitle + "/" + option + "/" + name + "/" + field;
         File file = new File(path);
@@ -177,6 +180,24 @@ public class FileManager extends Application {
         if(file.exists()){
             try(FileInputStream stream = new FileInputStream(file)){
                 return BitmapFactory.decodeFile(file.getAbsolutePath());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public String loadTempFile(){
+        String path = getExternalFilesDir(null) + "/tmp.txt";
+        File file = new File(path);
+        if(file.exists()){
+            int length = (int)file.length();
+            byte[] bytes = new byte[length];
+            try(FileInputStream stream = new FileInputStream(file)){
+                stream.read(bytes);
+                return new String(bytes);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {

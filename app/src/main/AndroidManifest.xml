@@ -19,9 +19,6 @@
             android:name=".ServerStoryList"
             android:exported="true" />
         <activity
-            android:name=".SQLTest"
-            android:exported="true" />
-        <activity
             android:name=".Recording"
             android:exported="true" />
         <activity

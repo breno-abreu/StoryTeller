@@ -1,7 +1,12 @@
 hoje:
 
-- usuário (botão switch, não está ligado ao servidor)
-- funções php (puxar o nome das histórias salvas, fazer upload, e fazer download) <<
-- funções android
-- views
-- testes
+- criar banco de dados
+- testar as fuções de download e upload
+- criar interface de upload e download
+- criar usuários diferentes
+- ciclo de vida
+- mensagens ao excluir
+- tela de loading ao fazer download e upload
+- mudar símbolo de seta do dowload do servidor
+- substituir a classe filemanager por uma não global (melhor deixar assim) <<
+- excluir classes auxiliares <<

@@ -7,16 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -70,7 +63,6 @@ public class ServerStoryList extends AppCompatActivity {
     }
 
     public ArrayList<String> getTitlesOnServer(){
-
         Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
@@ -79,36 +71,76 @@ public class ServerStoryList extends AppCompatActivity {
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
-
-                        File file = new File(getExternalFilesDir(null) + "/tmp.txt");
-                        try (FileOutputStream nameStream = new FileOutputStream(file)) {
-                            nameStream.write(result.getBytes());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        ((FileManager)getApplication()).writeTempFile(result);
                     }
                 }
             }
         });
 
-        File file = new File(getExternalFilesDir(null) + "/tmp.txt");
-        String text;
-        if(file.exists()){
-            int length = (int)file.length();
-            byte[] bytes = new byte[length];
-            try(FileInputStream stream = new FileInputStream(file)){
-                stream.read(bytes);
-                text = new String(bytes);
-                Toast.makeText(this, text, Toast.LENGTH_LONG).show();
-                String[] titles = text.split("&&");
-                return new ArrayList<String>(Arrays.asList(titles));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        String text = ((FileManager)getApplication()).loadTempFile();
+
+        if(text != null){
+            String[] titles = text.split("&&");
+            return new ArrayList<String>(Arrays.asList(titles));
         }
         return null;
+    }
+    // https://www.youtube.com/watch?v=X8oD4q3XtQQ&ab_channel=CodesEasy, ver github
+    public ArrayList<ArrayList<String>> getDataFromServer(String title, String table){
+        Handler handler = new Handler();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                String[] fields = new String[2];
+                fields[0] = "story";
+                fields[1] = "table";
+
+                String[] data = new String[2];
+                data[0] = title;
+                data[1] = table;
+
+                PutData putData = new PutData("http://192.168.15.144/StoryTeller/get_info.php", "POST", fields, data);
+                if (putData.startPut()) {
+                    if (putData.onComplete()) {
+                        String result = putData.getResult();
+                        ((FileManager)getApplication()).writeTempFile(result);
+                    }
+                }
+            }
+        });
+
+        String text = ((FileManager)this.getApplication()).loadTempFile();
+        ArrayList<ArrayList<String>> allInfo = new ArrayList<ArrayList<String>>();
+
+        if(text != null){
+            String[] data = text.split("&&");
+            for(String content : data){
+                String[] info = content.split("%%");
+                ArrayList<String> aux = new ArrayList<String>(Arrays.asList(info));
+                allInfo.add(aux);
+            }
+            return allInfo;
+        }
+        return null;
+    }
+
+    public void writeFiles(String title){
+        ((FileManager)this.getApplication()).createStoryFolder(title);
+        ArrayList<ArrayList<String>> characters = getDataFromServer(title, "personagens");
+        ArrayList<ArrayList<String>> locations = getDataFromServer(title, "lugares");
+        ArrayList<ArrayList<String>> chapters = getDataFromServer(title, "capitulos");
+
+        for(ArrayList<String> info : characters){
+            ((FileManager)this.getApplication()).writeCharacter(title, info.get(0), info.get(1), null);
+        }
+
+        for(ArrayList<String> info : locations){
+            ((FileManager)this.getApplication()).writeLocation(title, info.get(0), info.get(1), null);
+        }
+
+        for(ArrayList<String> info : chapters){
+            ((FileManager)this.getApplication()).writeChapter(title, info.get(0), info.get(1));
+        }
     }
 
     public void goToPreviousActivity(View v){
@@ -117,8 +149,7 @@ public class ServerStoryList extends AppCompatActivity {
     }
 
     public void downloadStory(String title){
-
-
+        writeFiles(title);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
