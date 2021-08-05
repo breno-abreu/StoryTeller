@@ -1,13 +1,17 @@
 package com.csm43.storyteller;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +21,8 @@ public class Options extends AppCompatActivity {
     private String storyTitle;
     private EditText titleTop;
     private TextView titleBottom;
+    private ImageButton uploadButton;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +32,25 @@ public class Options extends AppCompatActivity {
         Intent intent = getIntent();
         storyTitle = intent.getStringExtra("TITLE");
 
+        progressBar = findViewById(R.id.uploadProgressBar);
+        progressBar.setVisibility(View.GONE);
         titleTop = findViewById(R.id.optionsTitleTop);
         titleBottom = findViewById(R.id.optionsTitleBottom);
 
         titleTop.setText(storyTitle);
         titleBottom.setText(storyTitle);
+
+        String user = ((FileManager)this.getApplication()).getUser();
+        uploadButton = findViewById(R.id.uploadButton);
+
+        if(user.equals("basic")){
+            uploadButton.setEnabled(false);
+            uploadButton.setVisibility(View.GONE);
+        }
+        else{
+            uploadButton.setEnabled(true);
+            uploadButton.setVisibility(View.VISIBLE);
+        }
     }
 
     public void showCharacterListActivity(View v){
@@ -58,6 +78,28 @@ public class Options extends AppCompatActivity {
     }
 
     public void deleteStory(View v){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Deseja mesmo excluir essa história?");
+        builder.setCancelable(true);
+        builder.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        deleteStory();
+                        dialog.cancel();
+                    }
+                });
+        builder.setNegativeButton("Cancelar",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    public void deleteStory(){
         ((FileManager)this.getApplication()).deleteStoryFolder(storyTitle);
         Toast.makeText(this, "História \"" + storyTitle + "\" excluída!", Toast.LENGTH_LONG).show();
         Intent mainActivity = new Intent(this, MainActivity.class);
@@ -70,6 +112,7 @@ public class Options extends AppCompatActivity {
     }
 
     public void uploadStory(View v) {
+        progressBar.setVisibility(View.VISIBLE);
         deleteStoryOnServer(storyTitle);
         sendTitleToServer(storyTitle);
 
@@ -99,7 +142,7 @@ public class Options extends AppCompatActivity {
                 sendDataToServer(storyTitle, "capitulos", name, description);
             }
         }
-
+        progressBar.setVisibility(View.GONE);
         Toast.makeText(this, "História: \"" + storyTitle + "\" salva no servidor!", Toast.LENGTH_LONG).show();
     }
 

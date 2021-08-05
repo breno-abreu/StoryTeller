@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ public class ServerStoryList extends AppCompatActivity {
     private StoryAdapter storyAdapter;
     private RecyclerView.LayoutManager storyLayoutManager;
     private TextView emptyText;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,8 @@ public class ServerStoryList extends AppCompatActivity {
         setContentView(R.layout.activity_server_story_list);
 
         emptyText = findViewById(R.id.serverEmptyText);
+        progressBar = findViewById(R.id.downloadProgressBar);
+        progressBar.setVisibility(View.GONE);
 
         if(buildRecyclerView())
             emptyText.setText("");
@@ -193,7 +197,9 @@ public class ServerStoryList extends AppCompatActivity {
     }
 
     public void downloadStory(String title){
+        progressBar.setVisibility(View.VISIBLE);
         writeFiles(title);
+        progressBar.setVisibility(View.GONE);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

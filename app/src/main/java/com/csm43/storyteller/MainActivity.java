@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager storyLayoutManager;
     private TextView emptyText;
     private TextView userType;
+    private ImageButton downloadButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,16 @@ public class MainActivity extends AppCompatActivity {
         userType.setText(user);
 
         emptyText = findViewById(R.id.mainEmptyText);
+        downloadButton = findViewById(R.id.downloadButton);
+
+        if(user.equals("basic")){
+            downloadButton.setEnabled(false);
+            downloadButton.setVisibility(View.GONE);
+        }
+        else{
+            downloadButton.setEnabled(true);
+            downloadButton.setVisibility(View.VISIBLE);
+        }
 
         if(buildRecyclerView())
             emptyText.setText("");
@@ -67,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
                 showOptionsActivity(title);
             }
         });
-
         return true;
     }
 

@@ -1,7 +1,9 @@
 package com.csm43.storyteller;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -9,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,6 +31,8 @@ public class Location extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         Intent intent = getIntent();
         storyTitle = intent.getStringExtra("TITLE");
@@ -99,7 +104,28 @@ public class Location extends AppCompatActivity {
         imgBitmap = bitmapDrawable.getBitmap();
     }
 
-    public void deleteLocation(View v){
+    public void deleteLocation(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Deseja mesmo excluir esse capítulo?");
+        builder.setCancelable(true);
+        builder.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        deleteLocation();
+                        dialog.cancel();
+                    }
+                });
+        builder.setNegativeButton("Cancelar",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+    public void deleteLocation(){
         ((FileManager)this.getApplication()).deleteLocation(storyTitle, name.getText().toString());
         Toast.makeText(this, "Lugar \"" + originalName + "\" excluído!", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, LocationList.class);

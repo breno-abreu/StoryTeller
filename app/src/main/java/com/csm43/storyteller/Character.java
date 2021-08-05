@@ -2,8 +2,10 @@ package com.csm43.storyteller;
 
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -13,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,6 +35,8 @@ public class Character extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character);
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         Intent intent = getIntent();
         storyTitle = intent.getStringExtra("TITLE");
@@ -100,7 +105,29 @@ public class Character extends AppCompatActivity {
         imgBitmap = bitmapDrawable.getBitmap();
     }
 
-    public void deleteCharacter(View v){
+    public void deleteCharacter(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Deseja mesmo excluir esse capítulo?");
+        builder.setCancelable(true);
+        builder.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        deleteCharacter();
+                        dialog.cancel();
+                    }
+                });
+        builder.setNegativeButton("Cancelar",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    public void deleteCharacter(){
         ((FileManager)this.getApplication()).deleteCharacter(storyTitle, name.getText().toString());
         Toast.makeText(this, "Personagem \"" + originalName + "\" excluído!", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, CharacterList.class);
