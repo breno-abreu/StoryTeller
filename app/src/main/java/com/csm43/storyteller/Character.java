@@ -107,7 +107,7 @@ public class Character extends AppCompatActivity {
 
     public void deleteCharacter(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Deseja mesmo excluir esse capítulo?");
+        builder.setMessage("Deseja mesmo excluir esse personagem?");
         builder.setCancelable(true);
         builder.setPositiveButton("OK",
                 new DialogInterface.OnClickListener() {

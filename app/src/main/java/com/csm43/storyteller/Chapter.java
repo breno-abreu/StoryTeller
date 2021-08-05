@@ -38,7 +38,7 @@ public class Chapter extends AppCompatActivity {
 
         if(intent.getStringExtra("NAME") != null){
             originalName = intent.getStringExtra("NAME");
-            loadLocation();
+            loadChapter();
         }
         else
             originalName = "";
@@ -49,12 +49,10 @@ public class Chapter extends AppCompatActivity {
             ((FileManager)this.getApplication()).writeChapter(storyTitle, name.getText().toString(),
                     description.getText().toString());
             Toast.makeText(this, "Capítulo salvo!", Toast.LENGTH_LONG).show();
-
-            //Toast.makeText(this, "Salvo", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void loadLocation(){
+    private void loadChapter(){
         String nameTemp = ((FileManager)this.getApplication()).loadFile(storyTitle,
                 "Capítulos", originalName, "nome.stf");
         String physicalTemp = ((FileManager)this.getApplication()).loadFile(storyTitle,

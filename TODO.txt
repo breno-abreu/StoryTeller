@@ -20,17 +20,17 @@
 - salvar imagem básica
 - permitir duplicatas? não né, por causa das pastas
 - rename
-- mover a tela para cima ao escrever a descrição
+- mover a tela para cima ao escrever a descrição <<
 - permissões
 - Pausar execução do áudio
-- mudar símbolo da seta no download do servidor (não vai dar tempo)
-- substituir a classe filemanager para uma classe não global
-- ducplicatas no servidor -> excluir todas as informações nas tabelas sobre uma história antes de fazer upload
+- mudar símbolo da seta no download do servidor (não vai dar tempo) <<
+- substituir a classe filemanager para uma classe não global <<
+- ducplicatas no servidor -> excluir todas as informações nas tabelas sobre uma história antes de fazer upload <<
 
 falta:
-- verificação de dados e mensagens
-- banco de dados
-- usuários
+- verificação de dados e mensagens <<
+- banco de dados <<
+- usuários <<
 - áudio <<
 - design <<
 - bugs
@@ -39,15 +39,17 @@ falta:
 - toolbar <<
 - trocar por recycleview <<
 - remover campos dos personagens <<
-- ciclo de vida, áudios, aruqivos sem salvar, etc
+- ciclo de vida, áudios, aruqivos sem salvar, etc <<
+
+- VERIFRICAR SE SE CONECTOU AO SERVIDOR OU NÃO
 
 
 All:
 - Storyteller 
 - Fazer sistema básico com carregamento de imagens <<
-- Fazer telas de aviso
+- Fazer telas de aviso <<
 - Salvar no dispositivo <<
-- Salvar no BD
+- Salvar no BD <<
 - Usuários diferentes (criar classe estática, switch booleano que diz se é premium ou não)
 - Gravação e reprodução de áudio <<
 - Design deixar para depois <<

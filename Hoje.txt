@@ -13,3 +13,7 @@ hoje:
 - soft keyboard <<
 - aumentar texto quando escrvo em um multiline edittext <<
 - criar thread para download e upload <<
+
+amanhã:
+- ciclo de vida
+- testes

@@ -66,6 +66,13 @@ public class Recording extends AppCompatActivity {
             pauseButton.setEnabled(true);
             stopButton.setEnabled(true);
             statusText.setText("Tocando");
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    stopAudio();
+                }
+            });
+
         } catch (IOException e){
             Log.d("breno", "prepare() fail");
         }
@@ -87,6 +94,16 @@ public class Recording extends AppCompatActivity {
     }
 
     public void stopAudio(View v){
+        mediaPlayer.stop();
+        mediaPlayer.release();
+        Toast.makeText(this, "Parando Áudio", Toast.LENGTH_SHORT).show();
+        playButton.setEnabled(true);
+        pauseButton.setEnabled(false);
+        stopButton.setEnabled(false);
+        statusText.setText("");
+    }
+
+    public void stopAudio(){
         mediaPlayer.stop();
         mediaPlayer.release();
         Toast.makeText(this, "Parando Áudio", Toast.LENGTH_SHORT).show();
@@ -118,5 +135,14 @@ public class Recording extends AppCompatActivity {
         Intent intent = new Intent(this, RecordingList.class);
         intent.putExtra("TITLE", storyTitle);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(mediaPlayer != null){
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 }

@@ -178,4 +178,14 @@ public class RecordingList extends AppCompatActivity {
         intent.putExtra("TITLE", storyTitle);
         startActivity(intent);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(mediaRecorder != null){
+            mediaRecorder.stop();
+            mediaRecorder.release();
+            mediaRecorder = null;
+        }
+    }
 }

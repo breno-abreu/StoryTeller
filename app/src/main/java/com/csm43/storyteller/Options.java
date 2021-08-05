@@ -161,8 +161,6 @@ public class Options extends AppCompatActivity {
                     if (putData.startPut()) {
                         if (putData.onComplete()) {
                             String result = putData.getResult();
-                            //((FileManager)getApplication()).writeTempFile(result);
-                            //TODO mensagem
                         }
                     }
                     notify();
@@ -205,8 +203,6 @@ public class Options extends AppCompatActivity {
                     if (putData.startPut()) {
                         if (putData.onComplete()) {
                             String result = putData.getResult();
-                            //((FileManager)getApplication()).writeTempFile(result);
-                            //TODO mensagem
                         }
                     }
                     notify();
@@ -243,8 +239,6 @@ public class Options extends AppCompatActivity {
                     if (putData.startPut()) {
                         if (putData.onComplete()) {
                             String result = putData.getResult();
-                            //((FileManager)getApplication()).writeTempFile(result);
-                            //TODO mensagem
                         }
                     }
                     notify();
@@ -264,6 +258,5 @@ public class Options extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-
     }
 }
