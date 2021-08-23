@@ -1,7 +1,9 @@
 package com.csm43.storyteller;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -24,7 +26,6 @@ public class Recording extends AppCompatActivity {
     private TextView fileNameView;
     private TextView statusText;
     private ImageButton playButton;
-    private ImageButton pauseButton;
     private ImageButton stopButton;
     private MediaPlayer mediaPlayer;
     private String filePath;
@@ -48,10 +49,8 @@ public class Recording extends AppCompatActivity {
         statusText.setText("");
 
         playButton = findViewById(R.id.playAudio);
-        pauseButton = findViewById(R.id.pauseAudio);
         stopButton = findViewById(R.id.stopAudio);
 
-        pauseButton.setEnabled(false);
         stopButton.setEnabled(false);
 
         filePath = getExternalFilesDir(null) + "/Histórias/" + storyTitle + "/Gravações/" +  fileName;
@@ -65,7 +64,6 @@ public class Recording extends AppCompatActivity {
             mediaPlayer.start();
             Toast.makeText(this, "Tocando Áudio", Toast.LENGTH_SHORT).show();
             playButton.setEnabled(false);
-            pauseButton.setEnabled(true);
             stopButton.setEnabled(true);
             statusText.setText("Tocando");
             mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -80,27 +78,11 @@ public class Recording extends AppCompatActivity {
         }
     }
 
-    public void pauseAudio(View v){
-        try{
-            if (mediaPlayer.isPlaying()) {
-                mediaPlayer.pause();
-                Toast.makeText(this, "Pausando Áudio", Toast.LENGTH_SHORT).show();
-                playButton.setEnabled(true);
-                pauseButton.setEnabled(false);
-                stopButton.setEnabled(true);
-                statusText.setText("Pausado");
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
-
     public void stopAudio(View v){
         mediaPlayer.stop();
         mediaPlayer.release();
         Toast.makeText(this, "Parando Áudio", Toast.LENGTH_SHORT).show();
         playButton.setEnabled(true);
-        pauseButton.setEnabled(false);
         stopButton.setEnabled(false);
         statusText.setText("");
     }
@@ -110,9 +92,16 @@ public class Recording extends AppCompatActivity {
         mediaPlayer.release();
         Toast.makeText(this, "Parando Áudio", Toast.LENGTH_SHORT).show();
         playButton.setEnabled(true);
-        pauseButton.setEnabled(false);
         stopButton.setEnabled(false);
         statusText.setText("");
+    }
+
+    public void deleteRecording(){
+        ((FileManager)this.getApplication()).deleteRecording(storyTitle, fileName);
+        Toast.makeText(this, "Gravação \"" + fileName + "\" excluída!", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, RecordingList.class);
+        intent.putExtra("TITLE", storyTitle);
+        startActivity(intent);
     }
 
     public void deleteRecording(View v){
@@ -121,11 +110,25 @@ public class Recording extends AppCompatActivity {
             mediaPlayer = null;
         }
 
-        ((FileManager)this.getApplication()).deleteRecording(storyTitle, fileName);
-        Toast.makeText(this, "Gravação \"" + fileName + "\" excluída!", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this, RecordingList.class);
-        intent.putExtra("TITLE", storyTitle);
-        startActivity(intent);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Deseja mesmo excluir essa gravação?");
+        builder.setCancelable(true);
+        builder.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        deleteRecording();
+                        dialog.cancel();
+                    }
+                });
+        builder.setNegativeButton("Cancelar",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     public void goToPreviousActivity(View v){

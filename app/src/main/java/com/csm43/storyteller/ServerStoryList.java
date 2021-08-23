@@ -71,8 +71,7 @@ public class ServerStoryList extends AppCompatActivity {
     }
 
     public ArrayList<String> getTitlesFromServer(){
-        Handler handler = new Handler();
-
+        //Handler handler = new Handler();
         Runnable task = new Runnable() {
             @Override
             public void run() {

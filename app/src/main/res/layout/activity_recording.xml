@@ -68,35 +68,21 @@
         android:id="@+id/playAudio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
         android:layout_marginBottom="50dp"
         android:backgroundTint="#1E88E5"
         android:clickable="true"
         android:onClick="playAudio"
         app:layout_constraintBottom_toTopOf="@+id/toolbar20"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/play"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/pauseAudio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginBottom="50dp"
-        android:backgroundTint="#1E88E5"
-        android:clickable="true"
-        android:onClick="pauseAudio"
-        app:layout_constraintBottom_toTopOf="@+id/toolbar20"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/pause"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/stopAudio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="50dp"
+        android:layout_marginEnd="100dp"
         android:layout_marginBottom="50dp"
         android:backgroundTint="#1E88E5"
         android:clickable="true"

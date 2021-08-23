@@ -132,11 +132,11 @@ public class RecordingList extends AppCompatActivity {
     public void startRecording(View v){
         Calendar calendar = Calendar.getInstance();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH_mm_ss");
         String dateString = sdf.format(calendar.getTime());
 
         filePath = getExternalFilesDir(null) + "/Histórias/" + storyTitle + "/Gravações/"
-                + "STR" + dateString + ".3gp";
+                + "st" + dateString + ".3gp";
         mediaRecorder = new MediaRecorder();
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
