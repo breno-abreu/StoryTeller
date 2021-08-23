@@ -1,6 +1,8 @@
 package com.csm43.storyteller;
 
 public class Item {
+    /* Classe contendo as informações de um item de uma lista */
+
     private String title;
     private int imageid;
     private int arrowid;

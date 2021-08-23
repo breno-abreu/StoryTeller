@@ -16,6 +16,8 @@ import java.net.URLEncoder;
 
 // Código pronto pego da internet
 public class PutData extends Thread {
+    /* Classe que irá executar os arquivos .php que irão adicionar e retornar informações do servidor */
+
     private String url;
     private String method;
     private String result_data = "";
@@ -33,7 +35,7 @@ public class PutData extends Thread {
         }
     }
 
-    @Override
+    //@Override
     public void run() {
         try {
             String UTF8 = "UTF-8", iso = "iso-8859-1";

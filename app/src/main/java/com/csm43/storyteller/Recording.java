@@ -16,6 +16,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class Recording extends AppCompatActivity {
+    /* Classe para a activity que irá reproduzir um arquivo de áudio gravado pelo usuário */
+
     private String storyTitle;
     private String fileName;
     private TextView titleBottom;

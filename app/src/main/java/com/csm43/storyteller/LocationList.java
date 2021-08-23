@@ -15,6 +15,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class LocationList extends AppCompatActivity {
+    /* Classe para a activity que contém uma lista de lugares */
+
     private String storyTitle;
 
     private RecyclerView storyRecyclerView;

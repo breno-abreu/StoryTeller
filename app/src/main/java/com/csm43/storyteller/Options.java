@@ -18,6 +18,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class Options extends AppCompatActivity {
+    /* Classe para a activity que mostra as opções para o usuário.
+     * Além de levar às demais activities, também faz o upload e download de histórias do servidor */
+
     private String storyTitle;
     private EditText titleTop;
     private TextView titleBottom;

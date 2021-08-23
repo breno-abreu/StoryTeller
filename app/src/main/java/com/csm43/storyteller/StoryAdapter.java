@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHolder> {
+   /* Classe que permite adicionar itens em um RecyclerView */
+
    private ArrayList<Item> storyList;
    private OnItemClickListener listener;
 

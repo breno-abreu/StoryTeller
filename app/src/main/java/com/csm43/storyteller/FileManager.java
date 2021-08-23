@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class FileManager extends Application {
+    /* Classe para auxiliar o gerenciamento de arquivos */
+
     private String user = "basic";
 
     public void setUser(String value){

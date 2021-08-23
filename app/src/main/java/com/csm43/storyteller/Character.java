@@ -22,6 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Character extends AppCompatActivity {
+    /* Classe para a activity que contém as informações de um personagem */
+
     private static final int GALLERY_REQUEST_CODE = 123;
     ImageView charImage;
     Bitmap imgBitmap;

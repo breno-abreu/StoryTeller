@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Chapter extends AppCompatActivity {
+    /* Classe para a activity que contém as informações sobre um capítulo */
+
     private EditText name;
     private EditText description;
     private String originalName;

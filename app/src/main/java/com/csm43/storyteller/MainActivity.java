@@ -14,6 +14,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    /* Classe para a activity inicial contendo a lista de histórias presentes no dispositivo */
+
     private RecyclerView storyRecyclerView;
     private StoryAdapter storyAdapter;
     private RecyclerView.LayoutManager storyLayoutManager;

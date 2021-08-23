@@ -12,6 +12,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class ChapterList extends AppCompatActivity {
+    /* Classe para a activity que contém a lista de capítulos */
+
     private String storyTitle;
     private RecyclerView recyclerView;
     private StoryAdapter adapter;

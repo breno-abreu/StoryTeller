@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ServerStoryList extends AppCompatActivity {
+    /* Classe para a activity que contém a lista de histórias presentes no servidor */
+
     private RecyclerView storyRecyclerView;
     private StoryAdapter storyAdapter;
     private RecyclerView.LayoutManager storyLayoutManager;

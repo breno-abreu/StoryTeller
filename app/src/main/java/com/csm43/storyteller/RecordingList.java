@@ -26,6 +26,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class RecordingList extends AppCompatActivity {
+    /* Classe para a activity que contém a lista de gravações feitas pelo usuário,
+     * além de conter os botões para iniciar a gravação de áudio */
+
     private String storyTitle;
     private RecyclerView recyclerView;
     private StoryAdapter adapter;

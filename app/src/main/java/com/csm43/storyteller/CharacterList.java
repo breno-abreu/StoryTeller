@@ -16,6 +16,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class CharacterList extends AppCompatActivity {
+    /* Classe para a activity que contém a lista de personagens */
+
     private String storyTitle;
     //private LinearLayout linearLayout;
     private RecyclerView storyRecyclerView;

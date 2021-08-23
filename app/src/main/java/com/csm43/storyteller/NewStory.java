@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class NewStory extends AppCompatActivity {
+    /* Classe para a activity que irá criar uma nova história */
+
     private EditText storyTitle;
 
     @Override

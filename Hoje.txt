@@ -15,5 +15,6 @@ hoje:
 - criar thread para download e upload <<
 
 amanhã:
-- ciclo de vida
-- testes
+- única thread
+- microfone
+- json ou xml

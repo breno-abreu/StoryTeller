@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Switch;
 
 public class ChangeUser extends AppCompatActivity {
+    /* Classe para a activity de mudança de usuário
+     * Contém um Switch que alterna entre usuário básico e premium */
+
     private Switch userSwitch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,10 +25,7 @@ public class ChangeUser extends AppCompatActivity {
     }
 
     public void changeType(View v){
-        if(userSwitch.isChecked())
-            userSwitch.setChecked(true);
-        else
-            userSwitch.setChecked(false);
+        userSwitch.setChecked(userSwitch.isChecked());
     }
 
     public void goToPreviousActivity(View v){

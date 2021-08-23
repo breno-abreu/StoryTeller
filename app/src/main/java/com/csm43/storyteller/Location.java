@@ -18,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Location extends AppCompatActivity {
+    /* Classe para a activity que contém as informações de um lugar */
+
     private static final int GALLERY_REQUEST_CODE = 123;
     ImageView locationImage;
     Bitmap imgBitmap;
